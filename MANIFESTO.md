@@ -23,12 +23,17 @@ expresses what software should mean, do, and feel like. It can contain precise
 rules, goals, examples, visual references, models, measurements, open questions,
 and choices that the author deliberately leaves to an LLM.
 
+An **intent revision** is one identifiable snapshot of that source. Chat, code,
+current behavior, and earlier results may help a human or LLM edit the intent
+program, but a lasting product choice must appear in or be referenced by the
+revision before the compiler relies on it.
+
 To **compile** an intent program means to ask an LLM-backed process to create or
-update working software from the whole program or from a change to it. A compile
-can produce code, tests, previews, migrations, questions, explanations, views
-for a particular person or task, and evidence. The process need not produce the
-same implementation twice. The resulting software must still satisfy the intent
-and survive checks in the real environment.
+update working software from a named intent revision. A compile can produce
+code, tests, previews, migrations, questions, explanations, views for a
+particular person or task, and evidence. The process need not produce the same
+implementation twice. The resulting software must still satisfy the intent and
+survive checks in the real environment.
 
 ## Tenets
 
@@ -68,6 +73,21 @@ OpenIntent should preserve the qualities that make programming enjoyable:
 - room for experiments, surprises, and personal taste;
 - small ideas that compose into larger ones; and
 - the ability to revise, simplify, and refactor earlier thought.
+
+An intent program should be pleasant to write and inviting to read. It should
+sound like people explaining and shaping a product together, not like a legal
+contract, government form, or compliance manual. When an idea needs more
+precision, authors should use the medium that expresses it clearly instead of
+making the prose bureaucratic.
+
+The human-owned source should use the product's natural vocabulary and include
+the detail that carries human choices or helps people steer it. A sentence such
+as “Play picks up where you left off” should not become defensive prose merely
+to save the compiler work. LLMs and tools may expand concise intent into states,
+conditions, checks, and edge cases in machine-maintained views. When an
+expansion reveals a product choice that the human has not made, the compiler
+should ask or propose a pleasant source edit. It should not silently turn its
+own reading into product intent.
 
 If OpenIntent turns authors into people who fill templates, synchronize tables,
 or merely approve generated code, it has failed this tenet.
@@ -110,7 +130,34 @@ text editor, notebook, whiteboard, simulator, design tool, or a combination of
 them. Markdown can provide a portable representation without becoming the only
 authoring experience.
 
-### 5. Make each useful change runnable
+### 5. Edit intent, then compile a named revision
+
+When a human asks to change what the product should do, OpenIntent starts by
+editing the intent program. An intent editor may inspect code, run current
+software, and study references as evidence. It first proposes the durable intent
+that should guide the work instead of treating the request as a hidden
+instruction to modify code directly.
+
+Authors may refine the intent through any number of drafts before implementation.
+They may also compile a selected draft into an exploratory realization when
+working software will help them think. OpenIntent should not force every intent
+edit into an implementation loop immediately.
+
+Sometimes a request exposes software that already breaks clear intent. The
+intent does not need a cosmetic edit in that case; the compiler should fix the
+software from the existing revision. When the product rule is missing or
+unclear, the intent editor should state the lasting product truth rather than
+preserve the temporary bug or local patch. “The top-right icons stay put when
+you switch tabs” belongs in intent. “Remote currently puts them elsewhere”
+belongs with the observed result and implementation work.
+
+Every compile should name the exact intent revision it realizes. The same LLM
+may edit intent and implementation, but it should keep the two steps visible and
+separate. When implementation reveals a missing choice, it should propose a new
+intent edit rather than silently changing the revision being compiled. A future
+compiler should not need old chat history to recover what the human wanted.
+
+### 6. Make each useful change runnable
 
 An author should be able to compile a small intent change and experience its
 effects without restating the whole product. The compiler should identify what
@@ -125,7 +172,7 @@ Authors should be able to use this loop in several ways:
 
 All three modes should help the author refine the program.
 
-### 6. Give every project a blank slate
+### 7. Give every project a blank slate
 
 OpenIntent should provide a small set of powerful ideas rather than a fixed
 catalog of everything software may contain. Each project must be free to invent
@@ -139,7 +186,7 @@ without flattening their differences.
 The method should supply enough grammar for humans and LLMs to work together. It
 should not supply the imagination.
 
-### 7. Express both commitment and freedom
+### 8. Express both commitment and freedom
 
 An intent program should let an author distinguish among:
 
@@ -154,7 +201,7 @@ The compiler should report contradictions and missing material choices. It
 should not treat every ambiguity as a defect. Deliberate freedom gives the
 compiler room to find solutions that the author did not anticipate.
 
-### 8. Use the medium that carries each idea best
+### 9. Use the medium that carries each idea best
 
 Text often communicates rules, reasons, and tradeoffs well. Images can
 communicate visual relationships faster. Interactive prototypes reveal timing
@@ -185,7 +232,7 @@ A human may use code, pseudocode, or an exact algorithm as intent when that form
 expresses a decision best. The method should preserve that decision without
 forcing the human to maintain all implementation code around it.
 
-### 9. Write intent early, then let reality teach it
+### 10. Write intent early, then let reality teach it
 
 People should write clear intent before implementation when that work helps
 them think. They may revise it many times before they compile anything.
@@ -198,7 +245,7 @@ authority.
 
 The program leads the work, and experience improves the program.
 
-### 10. Treat each implementation as a replaceable realization
+### 11. Treat each implementation as a replaceable realization
 
 One intent program may produce several valid implementations for different
 platforms, operating conditions, experiments, or moments in a product's life.
@@ -210,7 +257,7 @@ discarding the product's identity. When they truly care about an internal
 choice, they can promote that choice into the intent program and explain why it
 must survive.
 
-### 11. Make machines carry the bookkeeping
+### 12. Make machines carry the bookkeeping
 
 LLMs and tools should maintain links, identifiers, dependency maps, impact
 reports, test mappings, change histories, and evidence records when those items
@@ -228,19 +275,25 @@ should ask:
 
 1. Does this help a person express a meaningful idea with more clarity or
    range?
-2. Does it make the compile-and-experience loop faster or more informative?
-3. Does the human still control the choices that need purpose, judgment, or
+2. Is it pleasant to write and inviting to read without sounding like a legal
+   contract or administrative form?
+3. Does the human-owned source state a lasting product truth rather than a
+   temporary bug or local code patch?
+4. Can the compiler realize it from a named intent revision without relying on
+   hidden chat history?
+5. Does it make the compile-and-experience loop faster or more informative?
+6. Does the human still control the choices that need purpose, judgment, or
    taste?
-4. Can a person who is new to the product use it to predict the important
+7. Can a person who is new to the product use it to predict the important
    effects of a bounded change and challenge the compiler's result?
-5. Can a human see what a generated view omitted or inferred and reach the
+8. Can a human see what a generated view omitted or inferred and reach the
    source behind every important claim?
-6. Does the LLM carry the implementation and bookkeeping work that does not
+9. Does the LLM carry the implementation and bookkeeping work that does not
    need human attention?
-7. Can a project invent a form that we did not anticipate?
-8. Can another realization replace the current one without losing what the
-   author cared about?
-9. Can humans and LLMs understand the result without depending on one vendor?
+10. Can a project invent a form that we did not anticipate?
+11. Can another realization replace the current one without losing what the
+    author cared about?
+12. Can humans and LLMs understand the result without depending on one vendor?
 
 A feature that fails these questions should change or stay out, even when it
 makes the project look more complete.

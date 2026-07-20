@@ -187,6 +187,56 @@ Example:
 The requirement says which requests count, when the clock starts, which results
 count, and how an outage changes expectations.
 
+## Reuse operating conditions with profiles
+
+When several rules repeat a substantial workload, data shape, device class,
+platform range, topology, dependency set, or failure state, put those conditions
+in an operating profile. Keep each actor duty and threshold in its capability or
+quality rule.
+
+For example, `PROF-PEAK-SITE` may define 500 pickup actions per second, two
+service processes, regional audit contract revision 1, and a 15-minute
+measurement window. `QLT-AUDIT.event-availability` still states how quickly an
+audit event must become readable under that profile.
+
+Do not put a passing result, current hardware serial number, transient host, or
+implementation technique in a profile. Evidence records the actual environment
+and deviations for one run.
+
+## Use the clearest medium for exact boundary detail
+
+Text remains the semantic anchor for actors, states, permissions, failures,
+accessibility meaning, and required results. Some exact details communicate more
+clearly through another medium:
+
+- a screenshot, SVG, or interactive rendering can define visual relationships;
+- an audio file can define an audible cue;
+- a timing diagram can define event relationships;
+- a protocol annex, schema, or fixture can define interoperable fields and
+  bytes; and
+- a diagram can define an externally visible topology or hardware arrangement.
+
+Create a normative supporting-artifact record only when exact artifact content
+forms part of the product boundary. The governing requirement explains why it
+matters. The record states which properties are normative, which details merely
+illustrate, and how platforms, viewports, languages, accessibility modes, or
+protocol versions may vary.
+
+Do not promote an implementation screenshot, generated fixture, or design
+exploration merely because it exists. Product authority accepts the reference
+through the normal change loop. Keep a reviewable source or rendering in Git so
+no hosted editor owns the contract.
+
+## Own shared contracts once
+
+In a multi-product repository, place each shared protocol, user journey, data
+boundary, or operator contract under one product. Consuming products link to the
+owner's intent IDs and specify their own failure or compatibility behavior.
+They do not paraphrase the shared rule.
+
+When a change touches several products, one coordinator tracks the combined
+work while each product authority accepts only its own scope.
+
 ## Assumptions and external dependencies
 
 An assumption names a fact the product does not control:
@@ -243,5 +293,9 @@ Before asking for intent review, confirm that:
 - every permission and transition summary links to governing IDs;
 - examples do not create hidden rules;
 - no architecture choice appears without an external reason;
+- every shared contract has one owning product;
+- every operating profile defines conditions without hiding a duty or result;
+- every normative supporting artifact has a governing requirement, declared
+  scope, allowed variation, and checked-in reviewable form;
 - every open question has an owner and blocks acceptance when needed; and
 - every requirement has a plausible acceptance method.

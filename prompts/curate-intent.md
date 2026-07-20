@@ -5,7 +5,7 @@ Act as the curator for `<product or repository scope>`.
 ## Read
 
 1. `<nearest AGENTS.md>`
-2. `<intent index>`
+2. `<root index and affected product indices>`
 3. `<artifact paths or tree-wide scope>`
 4. `<active change records>`
 
@@ -27,21 +27,27 @@ asking product authority.
 ## Checks
 
 1. Check required metadata, allowed states, semantic ID uniqueness, links,
-   scenario parents, the product-authority registry, and implementation targets.
+   scenario parents, product ownership and dependencies, authority registries,
+   and component and composition targets.
 2. Find permission, state, transition, and flow rows that state product duties
    without governing normative IDs. Find normative scenarios missing from
    acceptance maps.
 3. Check glossary terms for missing definitions or competing names.
-4. Measure large capability files and common context paths. Propose topic-based
-   splits that preserve IDs.
-5. Find active changes with missing owners, stale checkpoints, unresolved
+4. Measure large capability files and common context paths. Propose behavior-topic
+   splits that preserve IDs and keep requirements with scenarios and acceptance.
+5. Check operating profiles for hidden duties or results and check normative
+   supporting artifacts for missing governing IDs, scope, variation, or
+   checked-in reviewable forms.
+6. Find active changes with missing owners, stale checkpoints, unresolved
    questions, or overlapping IDs that lack a recorded order or resolver.
-6. For each target that claims conformance, find every applicable product
+7. For each target that claims conformance, find every applicable product
    invariant, requirement, or normative scenario without current evidence.
    Find evidence that names an old target or accepted intent revision.
-7. Enumerate actor-visible interfaces, events, errors, and states in scope.
+8. For each composition target, verify every participant revision and reject
+   borrowed component conclusions.
+9. Enumerate actor-visible interfaces, events, errors, and states in scope.
    Record behavior that accepted intent does not cover.
-8. Separate safe direct repairs from edits that can change product meaning.
+10. Separate safe direct repairs from edits that can change product meaning.
 
 ## Return
 

@@ -7,8 +7,11 @@ code in this repository.
 | --- | --- |
 | Change | `CHG-20260701-CONTROLLER-UNCERTAINTY` |
 | Implementation target | `IMPL-PICKUP-SERVICE-LEGACY` |
+| Target kind | Component |
 | Intent revision | `intent-example-17` |
 | Implementation revision | `build-4.8` |
+| Applicable operating profile | `PROF-PEAK-SITE` at `intent-example-17`; not run |
+| Applicable normative supporting artifact | None; this target excludes controller contract revision 7 |
 | Reviewer | Marcus Bell |
 | Review date | 2026-07-12 |
 | Environment | Fictional legacy client inspection and site simulator 2.1 |
@@ -23,6 +26,8 @@ code in this repository.
   review
 - Excluded checks and reason: no legacy conformance suite exists, so the map
   keeps every untested rule visible as `NOT RUN`
+- Excluded target and reason: `IMPL-PICKUP-SITE-R7` is a separate composition
+  and cannot use this component record
 
 ## Evidence map
 
@@ -55,7 +60,10 @@ None. The accepted target scope contains no SHOULD or SHOULD NOT rule.
 
 - Applicable intent or normative terms changed: no
 - Implementation moved from `build-4.8`: no
+- Applicable operating profile changed: no
+- Applicable normative supporting artifact changed: no
 - Dependencies, configuration, data, or conditions changed: no known change
+- Composition participants changed: not applicable to this component target
 - Incidents or observations contradict this result: no
 
 ## Reviewer probes

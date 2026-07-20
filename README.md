@@ -52,6 +52,12 @@ Projects register who may accept each product scope. They also track each
 implementation target separately, so a web service, device build, and supported
 release line never share one misleading conformance state.
 
+A repository may contain several products while giving each shared contract one
+owner. Projects can check components and supported compositions separately,
+reuse named operating profiles, split large capabilities by behavior topic, and
+govern visual, audio, protocol, or other supporting artifacts when those media
+communicate exact boundary details better than duplicated prose.
+
 ## Start here
 
 - Read [SPECIFICATION.md](SPECIFICATION.md) for the normative standard.
@@ -59,7 +65,8 @@ release line never share one misleading conformance state.
   existing project.
 - Copy and adapt the files in [templates](templates/README.md).
 - Study the [parcel locker example](examples/parcel-locker/README.md), which
-  covers permissions, concurrent pickup attempts, retries, and recovery.
+  covers multiple products, permissions, concurrent pickup attempts, retries,
+  recovery, profiles, supporting artifacts, and a pending composition.
 - Give every coding agent the project's root `AGENTS.md` as its first entry
   point.
 

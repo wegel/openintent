@@ -12,6 +12,12 @@ implementation as product authority.
 - Label claims `OBSERVED`, `INTENDED`, `UNKNOWN`, or `CONFLICT`.
 - Keep incompatible sources visible.
 - Separate product states from internal fields and technical events.
+- Record observed workloads, devices, platforms, topologies, and failure states
+  without treating them as supported operating profiles.
+- Record screenshots, designs, audio, protocol material, schemas, fixtures, and
+  diagrams without treating them as normative supporting artifacts.
+- Identify the apparent owner of each shared contract and keep conflicting
+  ownership claims visible.
 - Turn gaps into concrete alternatives for product owners.
 - Link promoted claims to accepted intent and the accepting change.
 
@@ -22,5 +28,6 @@ behavior the product should preserve, change, or leave unspecified.
 
 ## Handoff
 
-Provide the discovery record, source inventory, implementation targets, claims,
-confidence limits, conflicts, and decision questions.
+Provide the discovery record, source inventory, product and implementation
+targets, claims, candidate conditions and supporting artifacts, confidence
+limits, conflicts, and decision questions.

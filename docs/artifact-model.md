@@ -7,12 +7,21 @@ history tends to look current.
 ## Relationship map
 
 ```text
+                     repository index and ownership
+                    +--------------------------------+
+                    | products -> owned contracts    |
+                    |          -> target relations   |
+                    |          -> dependencies       |
+                    +--------------------------------+
+                                   |
                           product contract
-                    +-------------------------------+
-                    | product -> capabilities       |
-                    |         -> qualities          |
-                    |         -> glossary           |
-                    +-------------------------------+
+                    +--------------------------------+
+                    | product -> capabilities        |
+                    |         -> qualities           |
+                    |         -> profiles            |
+                    |         -> glossary            |
+                    | rules   -> supporting artifacts|
+                    +--------------------------------+
                            ^                 |
                            | proposed edits  | guides
                            |                 v
@@ -37,21 +46,59 @@ intent back through review.
 | Artifact | Default path | Authority | Main reader | Job |
 | --- | --- | --- | --- | --- |
 | Agent guide | `AGENTS.md` | Repository rules | Every agent | Route the reader and define safe behavior |
-| Intent index | `intent/index.md` | Accepted contract and target map | Every intent task | Route context, authority, active work, targets, and gaps |
-| Product | `intent/product.md` | Accepted intent | Product owner, any agent | Define purpose, boundary, actors, global invariants, and capability map |
-| Glossary | `intent/glossary.md` | Accepted terminology | Anyone reading intent | Give ambiguous domain words one product meaning |
-| Capability | `intent/capabilities/CAP-*.md` | Accepted intent | Author, implementer, reviewer | Define one coherent product ability |
-| Quality | `intent/qualities/QLT-*.md` | Accepted intent | Author, implementer, reviewer | Define measurable rules that span capabilities |
-| Durable decision | `intent/decisions/DEC-*.md` | Explanatory | Future author | Preserve why maintainers chose a long-lived product policy |
+| Repository index | root `intent/index.md` | Accepted ownership and routing map | Every multi-product task | Route products, shared contracts, dependencies, compositions, and cross-product work |
+| Product index | `<intent-root>/index.md` | Accepted contract and target map | Every product task | Route context, authority, active work, targets, profiles, references, and gaps |
+| Product | `<intent-root>/product.md` | Accepted intent | Product owner, any agent | Define purpose, boundary, actors, global invariants, and capability map |
+| Glossary | `<intent-root>/glossary.md` | Accepted terminology | Anyone reading intent | Give ambiguous domain words one product meaning |
+| Capability | `<intent-root>/capabilities/CAP-*.md` or `CAP-*/index.md` | Accepted intent | Author, implementer, reviewer | Define one coherent product ability in one file or behavior-topic directory |
+| Quality | `<intent-root>/qualities/QLT-*.md` | Accepted intent | Author, implementer, reviewer | Define measurable rules that span capabilities |
+| Operating profile | `<intent-root>/profiles/PROF-*.md` | Accepted conditions | Author, implementer, reviewer | Define reusable workload, data, device, platform, topology, or failure conditions without creating a duty |
+| Normative supporting artifact | `<intent-root>/references/REF-*.md` plus checked-in source | Accepted intent within governing rule scope | Author, designer, protocol author, reviewer | Carry exact visual, audible, protocol, schema, fixture, diagram, or other detail in the medium that communicates it best |
+| Durable decision | `<intent-root>/decisions/DEC-*.md` | Explanatory | Future author | Preserve why maintainers chose a long-lived product policy |
 | Change | `changes/CHG-*/change.md` | Explanatory; current state is explicit | Product owner, reviewers | Explain one coherent contract edit and its risk |
 | Plan | `changes/CHG-*/plan.md` | Implementation aid | Implementer | Map accepted outcomes to technical work |
 | Evidence | `changes/CHG-*/evidence.md` | Review record | Conformance reviewer | Map affected rules to checks and results |
 | Discovery | `discovery/*.md` | Evidence staging | Discoverer, product owner | Separate observed, intended, unknown, and conflicting claims |
-| Implementation target | Intent index or `implementations/IMPL-*.md` | Implementation inventory | Implementer, reviewer | Keep one target's owner, revision, intent revision, checkpoint, and evidence distinct |
+| Implementation target | Intent index or `implementations/IMPL-*.md` | Implementation inventory | Implementer, reviewer | Keep one component or composition target's owner, revision, relationships, intent revision, checkpoint, and evidence distinct |
 
 Permission, state, flow, and transition tables summarize named normative rules.
 They do not create untagged duties. Each consequential row links to the IDs that
 govern it.
+
+## Product ownership and dependencies
+
+A repository index routes products; it does not become an umbrella product
+contract. Each shared protocol, user journey, data boundary, or operator
+contract has one owning product and one canonical set of intent IDs. Consuming
+products link to those IDs and state what they do when the dependency changes or
+fails.
+
+A cross-product change may edit several owned contracts. The change records one
+coordinator and separate approvals from each affected authority scope. One
+owner's approval cannot accept another product's rules.
+
+## Conditions, supporting artifacts, and evidence
+
+An operating profile answers "under which supported conditions?" A capability
+or quality rule answers "what must happen?" An evidence record answers "what
+did this exact revision do under the actual conditions?" Keeping those answers
+separate lets several requirements reuse a large-device, low-memory, peak-load,
+or degraded-network definition without turning one benchmark run into policy.
+
+A normative supporting artifact carries exact detail that prose communicates
+poorly. Its Markdown record names the governed properties, allowed variation,
+and parent requirements. The parent text still names the actor, state, result,
+and reason the exact detail matters. A screenshot captured from a build remains
+evidence; it becomes product intent only when an accepted reference record and
+governing requirement say so.
+
+## Component and composition targets
+
+A component target can pass its own contract and still fail when paired with a
+specific peer, device, daemon, or protocol revision. A composition target names
+the supported assembly and records the exact participant revisions. Reviewers
+check the assembly separately. They do not copy component conclusions into the
+composition or use one successful assembly to certify a component everywhere.
 
 ## Why scenarios stay with capabilities
 
@@ -150,15 +197,19 @@ that full set.
 
 ## Context packets
 
-The intent index should list a context packet for each capability. For example:
+The product index should list a context packet for each capability. For example:
 
 | ID | Path | Read with | Triggers |
 | --- | --- | --- | --- |
-| `CAP-PICKUP` | `intent/capabilities/CAP-PICKUP.md` | `intent/glossary.md#claim`, `QLT-RECOVERY` | pickup, token, claim, compartment door |
+| `CAP-PICKUP` | `intent/capabilities/CAP-PICKUP.md` | `intent/glossary.md#claim`, `QLT-RECOVERY`, `PROF-PEAK-SITE`, `REF-CONTROLLER-OPEN-V7` | pickup, token, claim, compartment door |
 
 An agent starts with the row that matches the request. It follows explicit links
 when a requirement needs more context. It does not read every historical change
 or decision "just in case."
+
+For a modular capability, its `index.md` provides a second routing step. The
+agent reads only the behavior topic and the profiles or supporting artifacts
+that topic names.
 
 ## Artifact precedence in practice
 

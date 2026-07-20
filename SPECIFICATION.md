@@ -1,7 +1,7 @@
 # OpenIntent 0.1
 
 Status: Pre-publication draft  
-Last updated: 2026-07-19  
+Last updated: 2026-07-20  
 License: MIT
 
 Maintainers update this pre-publication draft in place. It MUST remain version
@@ -58,8 +58,9 @@ only when product authority accepts observable variation.
 
 ### 1.1 Core terms
 
-- **Product intent:** The accepted product, glossary, capability, and quality
-  files that state what actors may observe and what the product must preserve.
+- **Product intent:** The accepted product, glossary, capability, quality, and
+  operating-profile files, together with their normative supporting artifacts,
+  that state what actors may observe and what the product must preserve.
 - **Normative rule:** An invariant, requirement, or normative scenario that can
   change a conformance result. A rule carries a semantic intent ID.
 - **Observable:** Detectable by a user, operator, external system, regulator, or
@@ -78,10 +79,22 @@ only when product authority accepts observable variation.
   product review. It does not become authoritative until product authority
   accepts the relevant choices and maintainers merge it to the accepted branch.
 - **Implementation target:** A stable named implementation, such as one service,
-  application, device build, or supported release line, whose revisions can be
-  checked against intent. Target IDs use `IMPL-<NAME>` by default.
+  application, device build, supported release line, or supported composition,
+  whose revisions can be checked against intent. Target IDs use
+  `IMPL-<NAME>` by default.
 - **Implementation revision:** An immutable commit, build identifier, image
   digest, or equivalent identifier for one implementation target.
+- **Composition target:** An implementation target that assembles named
+  component targets or external systems. Its revision identifies the exact
+  participant revisions and configuration needed to reproduce the assembly.
+- **Operating profile:** A stable named set of supported conditions, such as a
+  workload, data scale, device class, platform, topology, or failure state,
+  under which one or more normative rules apply. Profile IDs use
+  `PROF-<NAME>` by default.
+- **Normative supporting artifact:** A visual, audio, protocol, schema, fixture,
+  diagram, or other checked-in artifact whose exact content a normative rule
+  explicitly requires within a stated scope. Reference IDs use
+  `REF-<NAME>` by default.
 - **Evidence scope:** One implementation target and revision checked against one
   accepted intent revision under named conditions.
 - **Preserved intent:** An unchanged rule that a change could plausibly break
@@ -96,10 +109,12 @@ An OpenIntent project MUST name one Git branch as its accepted branch. The
 project SHOULD use its default branch. `AGENTS.md` MUST name a different branch
 when the project does not use the default branch.
 
-On the accepted branch, accepted product, glossary, capability, and quality files
-under `intent/` define product intent. Code, tests, telemetry, tickets, chat,
-plans, old changes, discovery notes, and decision rationale do not override those
-files.
+On the accepted branch, accepted product, glossary, capability, quality, and
+operating-profile files under each intent root registered by the repository
+index define product intent. Normative supporting artifacts governed by those
+files form part of that intent within their declared scope. Code, tests,
+telemetry, tickets, chat, plans, old changes, discovery notes, and decision
+rationale do not override product intent.
 
 Only an accepted product-intent artifact on the accepted branch is authoritative.
 Draft files and edits on another branch are proposals. An accepted artifact
@@ -117,12 +132,13 @@ one from that file. For each scope, the registry MUST name:
 - the person who resolves overlapping or disputed scopes; and
 - the durable place where reviewers record acceptance.
 
-Each product, glossary, capability, and quality artifact MUST name its authority
-scope or link to the matching registry entry. A change record MUST name each
-person or agent who exercised that authority; a role name alone does not
-identify who accepted a particular revision. When a registry entry derives
-authority from a policy, the acceptance record MUST also identify the policy and
-revision that the named approver applied.
+Each product, glossary, capability, quality, operating profile, and normative
+supporting-artifact record MUST name its authority scope or link to the matching
+registry entry. A change record MUST name each person or agent who exercised
+that authority; a role name alone does not identify who accepted a particular
+revision. When a registry entry derives authority from a policy, the acceptance
+record MUST also identify the policy and revision that the named approver
+applied.
 
 An agent MUST NOT claim product authority unless the registry explicitly grants
 that agent authority for the exact choice.
@@ -147,8 +163,8 @@ A project MUST apply these rules when sources disagree:
 
 ### 2.4 Intent and implementation states
 
-Each product, glossary, capability, quality, and decision artifact MUST show one
-of these states:
+Each product, glossary, capability, quality, operating profile, normative
+supporting-artifact record, and decision artifact MUST show one of these states:
 
 | Intent state | Meaning |
 | --- | --- |
@@ -251,24 +267,42 @@ A project MAY add vendor-specific adapter files. Each adapter MUST point to
 
 ### 4.2 Intent index
 
-`intent/index.md` MUST list every product, glossary, capability, quality, and
-durable decision artifact on the accepted branch, including Draft and Retired
-artifacts. Each entry MUST give:
+Every repository MUST keep a root `intent/index.md`. A repository that contains
+one product MAY use that file as both its repository index and product index. A
+repository that contains several products MUST use the root index to list each
+product ID, product index, intent root, authority scope, implementation targets,
+and product dependencies.
+
+Each product MUST have one product index. The root index MAY serve as one
+product's index; every other product keeps an index under its registered intent
+root. Each product index MUST list every product, glossary, capability, quality,
+operating profile, normative supporting artifact, and durable decision artifact
+that it owns on the accepted branch, including Draft and Retired artifacts. Each
+entry MUST give:
 
 - the stable artifact ID, title, path, and intent state; and
 - the other files a reader needs with it.
 
-Each product, glossary, capability, and quality entry MUST also give the
-implementation targets to which it applies.
+Each product, glossary, capability, quality, and operating-profile entry MUST
+also give the implementation targets to which it applies. Each normative
+supporting-artifact entry MUST name its governing intent IDs.
 
 Unless a narrower normative rule says otherwise, every rule in an artifact
 applies to every implementation target listed for that artifact.
 
-The index MUST contain or link the product authority registry. It MUST also list
-each implementation target with its owner, current implementation revision,
-accepted intent revision, implementation checkpoint, and latest evidence. A
-project with many targets MAY keep detailed target records outside `intent/` and
-link them from the index.
+The root index MUST identify which product owns each shared or cross-product
+contract. A consuming product MUST link to the owning intent IDs instead of
+copying their rules. The root index MUST name dependencies whose failure or
+revision can change conformance and MUST route any active change that edits more
+than one product.
+
+The root index or linked product indices MUST contain the product authority
+registry. Each product index MUST also list every implementation target in its
+scope with its kind, owner, current implementation revision, accepted intent
+revision, implementation checkpoint, latest evidence, and target relationships.
+A composition target MUST list its component targets and named external
+participants. A project with many targets MAY keep detailed target records
+outside `intent/` and link them from the index.
 
 The index MUST keep retired artifact IDs findable and point to their replacements
 or removing changes.
@@ -278,14 +312,15 @@ a small context set without reading every intent file.
 
 ### 4.3 Product intent
 
-`intent/product.md` MUST state:
+Each registered intent root MUST contain `product.md`. That file MUST state:
 
 - the product purpose and outcomes;
 - actors outside the implementation;
 - the product boundary and non-goals;
 - system-wide invariants;
 - the capability map; and
-- product-wide assumptions or dependencies.
+- product-wide assumptions or dependencies, including owned and consumed
+  cross-product contracts.
 
 The product file MUST give each product-wide invariant a semantic ID and MUST
 include an acceptance map for those invariants.
@@ -295,8 +330,11 @@ quality files.
 
 ### 4.4 Capability intent
 
-Each coherent product ability MUST have a capability file under
-`intent/capabilities/`. A capability file MUST include:
+A product MUST keep a capability artifact for each coherent product ability
+under the owning intent root's `capabilities/` directory. A capability artifact
+MAY use one `CAP-<NAME>.md` file or a `CAP-<NAME>/index.md` file with linked topic
+files.
+The complete capability artifact MUST include:
 
 - a stable capability ID and intent state;
 - the outcome and boundary;
@@ -308,9 +346,9 @@ Each coherent product ability MUST have a capability file under
 - deliberately unspecified observable choices, when any exist; and
 - an acceptance map that names the evidence needed for each requirement.
 
-A capability file MUST cover relevant failure, recovery, permission, privacy,
-concurrency, ordering, time, and lifecycle behavior. Writers MAY organize these
-concerns around requirements instead of keeping empty sections.
+A capability artifact MUST cover relevant failure, recovery, permission,
+privacy, concurrency, ordering, time, and lifecycle behavior. Writers MAY
+organize these concerns around requirements instead of keeping empty sections.
 
 Only these parts of a capability create normative product duties:
 
@@ -324,14 +362,22 @@ Each row that describes required behavior MUST link to the semantic IDs that
 create that duty. A table row without such an ID link MUST NOT create a product
 duty. Writers use `EXAMPLE` for illustrative scenarios.
 
+For a modular capability, `index.md` MUST hold the capability metadata, overall
+outcome and boundary, and a content map. It MUST list every normative topic file
+and the context needed with that topic. Each normative rule MUST have one
+canonical definition across the capability. Each topic file MUST keep its
+related requirements, scenarios, failure behavior, and acceptance methods
+together. Writers MUST NOT split files only by artifact kind, such as putting
+all requirements in one file and all scenarios in another.
+
 Writers MUST express forbidden behavior with a `MUST NOT` requirement. An
 informal forbidden example does not set a product rule by itself.
 
 ### 4.5 Quality intent
 
-Cross-cutting quality rules MUST live under `intent/qualities/` when they apply
-to more than one capability or would otherwise repeat. Each quality requirement
-MUST name:
+Cross-cutting quality rules MUST live under the owning intent root's
+`qualities/` directory when they apply to more than one capability or would
+otherwise repeat. Each quality requirement MUST name:
 
 - the measured behavior;
 - the operating conditions;
@@ -349,7 +395,7 @@ Each normative quality scenario MUST appear in the quality acceptance map.
 Projects MUST define product terms that a reasonable reader could interpret in
 more than one way. A project MAY define a capability-local term in that
 capability. It SHOULD keep shared or product-wide terms in one or more glossary
-files under `intent/`.
+files under the owning intent root.
 
 Each glossary file MUST carry a stable glossary ID, intent state, accepted
 change, and product authority scope. Each term entry SHOULD state the exact
@@ -360,12 +406,15 @@ index MUST route readers to each file.
 
 ### 4.7 Change record
 
-Every change that alters accepted product intent MUST keep a stable record under
-`changes/<change-id>/change.md`. The record MUST state:
+Every change that alters accepted product intent MUST keep a stable record at a
+path that ends in `changes/<change-id>/change.md`. A reader MUST be able to
+reach that path from the root index through the owning product index. A change
+MAY span several registered products. The record MUST state:
 
 - why the product needs the change;
 - the intended outcome and non-goals;
-- each added, changed, retired, and preserved intent ID;
+- each affected product and each added, changed, retired, and preserved intent,
+  profile, and reference ID;
 - compatibility, migration, release, and recovery effects;
 - assumptions and open questions;
 - the change state and intent checkpoint;
@@ -379,13 +428,15 @@ result, named approver, and date. When product authority accepts only some
 proposed IDs, the change MUST use `Partially accepted` and keep the remaining
 choices visible.
 
-Before a participant edits an intent ID, that participant MUST check active
-changes for the same ID. Overlapping changes MUST link to each other, name one
-owner who coordinates acceptance order, and state which proposed revision builds
-on the other. If another accepted change alters an affected rule or normative
-term, the later change MUST rebase and return its intent checkpoint to `Review
-required` unless product authority confirms that the prior acceptance still
-applies.
+Before a participant edits an intent, profile, or reference ID, that participant
+MUST check active changes for the same ID. Overlapping changes MUST link to each
+other, name one owner who coordinates acceptance order, and state which proposed
+revision builds on the other. A cross-product change MUST name one coordinator,
+route from every affected product index, and record acceptance separately for
+each product-authority scope. If another accepted change alters an affected rule
+or normative term, the later change MUST rebase and return its intent checkpoint
+to `Review required` unless product authority confirms that the prior acceptance
+still applies.
 
 A project that accepts its first intent MUST use one baseline change record. For
 an existing system, baseline acceptance does not claim implementation
@@ -400,6 +451,8 @@ A change MAY keep `plan.md` for technical work. The plan does not define product
 intent. A change MUST keep a current evidence record for each target before
 reviewers call that target conformant. One evidence record covers one target and
 revision; a change that affects several targets keeps them in separate records.
+A composition target receives its own record rather than borrowing the records
+of its components.
 
 Completed change directories stay at their stable paths. Projects MUST NOT move
 them into an archive directory. Git records time; stable paths preserve links.
@@ -408,9 +461,10 @@ them into an archive directory. Git records time; stable paths preserve links.
 
 An evidence record MUST identify:
 
-- the change, implementation target, intent revision, and implementation
-  revision;
-- the environment and important test conditions;
+- the change, implementation target, target kind, intent revision, and
+  implementation revision;
+- the applicable operating profiles, environment, and important test
+  conditions;
 - each affected invariant, requirement, and normative scenario, including every
   `MUST`, `MUST NOT`, `SHOULD`, and `SHOULD NOT` rule;
 - a concrete test, inspection, analysis, or observed result for each item;
@@ -420,6 +474,17 @@ An evidence record MUST identify:
 
 An evidence record MAY link to test files, logs, reports, screenshots, or
 external systems. It SHOULD summarize results and link large outputs.
+
+An evidence record for a composition target MUST name every participating
+component target and external system with its exact revision, configuration,
+and role in the check. Component evidence MUST NOT prove composition
+conformance by implication. Composition evidence MUST NOT prove that one
+component conforms in another assembly or operating profile.
+
+When a rule governs a normative supporting artifact, the evidence map MUST name
+the governing intent ID, reference ID, comparison conditions, result, and
+allowed variation. A screenshot, fixture pass, or inspection proves only the
+properties and conditions it actually checks.
 
 A passing test suite MUST NOT serve as proof for requirements it does not
 exercise.
@@ -444,6 +509,8 @@ Current evidence becomes stale when:
 
 - an accepted edit changes an applicable rule or normative term;
 - the implementation target moves to a different behavior-relevant revision;
+- a composition participant moves to another revision;
+- an applicable operating profile or normative supporting artifact changes;
 - a dependency, configuration, data shape, or environment leaves the checked
   conditions; or
 - an incident or observation contradicts the recorded result.
@@ -454,8 +521,8 @@ evidence records remain at stable paths and keep their original scope.
 
 ### 4.9 Decision record
 
-A project MAY keep durable product decisions under `intent/decisions/`. A
-decision record captures context, the chosen policy, alternatives,
+A project MAY keep durable product decisions under the owning intent root's
+`decisions/` directory. A decision record captures context, the chosen policy, alternatives,
 consequences, affected intent IDs, and a review trigger. Its `Accepted` state
 means the named approvers accepted that account of the decision; it does not
 make the record normative product intent.
@@ -482,6 +549,70 @@ A project that studies an existing implementation MAY keep records under
 An agent MUST NOT promote `OBSERVED` to `INTENDED`. Product authority accepts
 that choice through the normal change loop.
 
+### 4.11 Operating profile
+
+A product MAY keep reusable supported conditions under
+`<intent-root>/profiles/`. Each operating profile MUST include:
+
+- a stable profile ID, intent state, authority scope, accepted change, and last
+  review date;
+- the product and implementation targets to which it can apply;
+- concrete workload, data, device, platform, topology, dependency,
+  configuration, starting-state, or failure conditions that the profile fixes;
+- every allowed range, tolerance, and exclusion needed to reproduce those
+  conditions; and
+- links to any base profile or external contract needed to interpret it.
+
+An operating profile defines conditions, not a product duty. A normative rule
+MUST link the profile ID when that profile controls when or how the rule applies.
+The rule still names the actor, required result, and threshold. A profile MUST
+NOT hide a requirement, permitted variation, or acceptance result.
+
+An evidence record that claims a profile-based result MUST name the profile ID
+and accepted revision, record the actual conditions, and state every deviation.
+A reviewer MUST NOT use a result outside the profile's allowed conditions as a
+passing result for that profile unless the governing rule explicitly permits
+the deviation.
+
+### 4.12 Normative supporting artifact
+
+A product MAY use the medium that communicates required information most
+clearly. A normative rule MAY govern one or more supporting artifacts such as a
+visual reference, interaction sequence, audio sample, protocol annex, schema,
+wire fixture, or diagram.
+
+Each normative supporting artifact MUST have a Markdown record under the owning
+intent root. The record MUST include:
+
+- a stable reference ID, intent state, authority scope, accepted change, and
+  last review date;
+- the governing normative intent IDs;
+- the checked-in source path, media or data format, and any checked-in rendering
+  or export needed for ordinary review;
+- the exact properties for which the artifact is normative;
+- the properties it illustrates but does not require;
+- allowed platform, accessibility, localization, responsive, or other
+  variation; and
+- the evidence that can distinguish conformance for the governed properties.
+
+The governing requirement MUST still state the actor, conditions, semantic
+result, and why exact visual, audible, protocol, or other artifact detail forms
+part of the product boundary. A supporting artifact MUST NOT silently define
+permissions, states, failures, accessibility meaning, or other behavior that a
+reader cannot identify from the governing text and artifact record.
+
+The repository MUST keep a reviewable representation of every normative
+supporting artifact on the accepted branch. A remote editable source MAY exist,
+but a vendor account or hosted service MUST NOT be the only way to retrieve,
+view, or apply the accepted artifact.
+
+When a change alters a normative supporting artifact's governed properties, the
+change record MUST list its reference ID and governing intent IDs. The edit
+requires product review, and evidence that depends on the old content becomes
+stale. Examples, exploratory media, and evidence captures remain
+non-normative unless a governing rule and accepted reference record explicitly
+make them normative.
+
 ## 5. Default project layout
 
 A conforming project SHOULD use this layout:
@@ -494,8 +625,16 @@ intent/
   glossary.md
   capabilities/
     CAP-<NAME>.md
+    CAP-<LARGE-NAME>/
+      index.md
+      <topic>.md
   qualities/
     QLT-<NAME>.md
+  profiles/
+    PROF-<NAME>.md
+  references/
+    REF-<NAME>.md
+    <checked-in supporting files>
   decisions/
     DEC-<NUMBER>.md
 changes/
@@ -509,7 +648,8 @@ implementations/
   IMPL-<NAME>.md
 ```
 
-`intent/glossary.md`, `plan.md`, `intent/decisions/`, `discovery/`, and detailed
+`intent/glossary.md`, modular capability directories, `intent/profiles/`,
+`intent/references/`, `plan.md`, `intent/decisions/`, `discovery/`, and detailed
 `implementations/` records are optional. An evidence record is required only
 before a reviewer calls an implementation target conformant. The intent index
 still lists every implementation target. A small project MAY begin with one
@@ -518,20 +658,22 @@ capability and add files only when a real product need calls for them.
 A project MAY use different paths when existing repository rules require them.
 Its root `AGENTS.md` MUST map each OpenIntent artifact type to the actual path.
 
-For a monorepo, the root intent index SHOULD route readers to product-level
-indices. Each independently owned product MAY keep its own nested `AGENTS.md`,
-`intent/`, and `changes/` directories. The nearest `AGENTS.md` applies while
-root rules still constrain the whole repository.
+For a multi-product repository, the root intent index MUST route readers to
+product-level indices and registered intent roots. Each independently owned
+product SHOULD keep its own nested `AGENTS.md`, intent root, and `changes/`
+directory when those boundaries reduce context or grant different authority.
+The nearest `AGENTS.md` applies while root rules still constrain the whole
+repository.
 
 ## 6. IDs, links, tests, and Git
 
 ### 6.1 Semantic IDs
 
-Each product, glossary, capability, quality, and durable decision artifact MUST
-have an ID. Each invariant, requirement, and normative scenario MUST also have
-an ID. Writers MAY revise a proposed ID; after product authority accepts the
-artifact or rule, writers MUST keep its ID stable. Projects SHOULD use these
-forms:
+Each product, glossary, capability, quality, operating profile, normative
+supporting-artifact record, and durable decision artifact MUST have an ID. Each
+invariant, requirement, and normative scenario MUST also have an ID. Writers
+MAY revise a proposed ID; after product authority accepts the artifact or rule,
+writers MUST keep its ID stable. Projects SHOULD use these forms:
 
 ```text
 PROD-PARCEL-PICKUP
@@ -541,6 +683,8 @@ CAP-PICKUP.one-active-claim
 CAP-PICKUP.retry-unknown-controller-result
 CAP-PICKUP.retry-unknown-controller-result.lost-success
 QLT-AUDIT.event-availability
+PROF-PEAK-SITE
+REF-CONTROLLER-OPEN-V7
 DEC-0001
 CHG-20260718-LOCK-RETRY
 IMPL-PICKUP-SERVICE
@@ -552,6 +696,10 @@ normative scenario appends another semantic slug to its parent requirement ID.
 
 Projects MAY use another unambiguous convention, but the intent index MUST
 document it.
+
+Operating profiles SHOULD use `PROF-<NAME>`. Normative supporting artifacts
+SHOULD use `REF-<NAME>`. A reference ID identifies the continuing governed
+artifact role; Git and the accepted intent revision identify its exact content.
 
 Writers MUST NOT reuse a retired ID for a different meaning. An intent ID names
 one continuing behavioral duty, not one exact sentence or threshold. Writers
@@ -806,6 +954,8 @@ policy choice by calling a fix urgent.
 An intent reviewer MUST check:
 
 - each material choice has a product authority with matching scope;
+- each shared or cross-product contract has one owning product and consumers
+  link to it without copying its rules;
 - each actor can be identified in the real product;
 - permissions say who may act and what unauthorized actors observe;
 - state rules cover creation, transition, expiry, cancellation, and recovery;
@@ -813,6 +963,9 @@ An intent reviewer MUST check:
 - concurrent actions preserve every invariant;
 - privacy, security, accessibility, and safety rules are explicit when relevant;
 - quality claims use conditions and measurable thresholds;
+- operating profiles state reproducible conditions without hiding duties;
+- normative supporting artifacts state their governed properties and allowed
+  variation without hiding semantic behavior;
 - assumptions do not hide product duties;
 - unspecified choices are observable variations that product authority accepts;
 - internal mechanics remain absent unless an external boundary requires them;
@@ -826,14 +979,18 @@ An intent reviewer MUST check:
 A conformance reviewer MUST:
 
 - name the implementation target;
+- identify whether the target is a component or composition and, for a
+  composition, name every participant revision;
 - read the named accepted intent revision;
 - map each affected invariant, requirement, normative scenario, and strong
   default to evidence;
 - seek negative, permission, failure, recovery, duplicate, race, time, and
   quality counterexamples where relevant;
 - record failed, missing, and inconclusive checks;
-- state what each check cannot prove; and
-- name the exact implementation revision and environment.
+- state what each check cannot prove;
+- name the exact implementation revision, applicable profile revisions, and
+  actual environment; and
+- inspect every changed normative supporting artifact under its declared scope.
 
 The reviewer MUST check whether any evidence became stale before issuing a
 conclusion.
@@ -872,9 +1029,10 @@ understand without loading the whole repository.
 
 These numbers provide guidance, not conformance gates:
 
-- `intent/product.md`: about 150 lines;
+- one product file: about 150 lines;
 - one glossary entry: one short paragraph;
-- one capability file: about 500 lines;
+- one capability topic file: about 500 lines;
+- one operating profile or supporting-artifact record: about 200 lines;
 - one change record: about 200 lines; and
 - one common implementation task’s intent context: about 2,000 lines.
 
@@ -884,7 +1042,7 @@ boundaries, repeated text, and unnecessary dependencies.
 ### 12.2 Splitting capabilities
 
 When one capability outgrows one file, projects SHOULD split it by behavior
-topic:
+topic as permitted by section 4.4:
 
 ```text
 intent/capabilities/
@@ -898,24 +1056,23 @@ The index keeps the capability metadata, boundary, invariants, and links.
 Topic files keep related requirements, scenarios, failure behavior, and
 acceptance methods together.
 
-Projects SHOULD NOT split one capability by artifact kind, such as placing all
-requirements in one file and all scenarios in another. That split forces every
-reader to load several files for one behavior.
-
-Stable IDs MUST survive file moves and splits.
+Stable IDs MUST survive file moves and splits. The product index points to the
+capability index, while that index routes each topic-specific context packet.
 
 ## 13. Repository audits
 
 Projects SHOULD run these audits periodically and after broad contract changes:
 
 1. **Structural audit:** Check required metadata, stable IDs, references, index
-   routes, glossary terms, state labels, and open-question owners.
+   routes, product ownership, dependencies, target relationships, glossary
+   terms, state labels, and open-question owners.
 2. **Intent coverage audit:** For each product boundary, find the accepted
    requirement, deliberate `UNSPECIFIED` choice, non-goal, or discovery gap that
    explains it.
 3. **Evidence audit:** For each applicable invariant, requirement, normative
    scenario, and strong default, find current evidence for each implementation
-   target or a visible missing-evidence marker.
+   target or a visible missing-evidence marker. Check composition targets
+   separately from their components.
 4. **Observed-behavior audit:** Enumerate actor-visible interfaces, events,
    errors, and states in an implementation. Record any behavior that accepted
    intent does not cover.
@@ -924,7 +1081,8 @@ Projects SHOULD run these audits periodically and after broad contract changes:
 6. **Overlap audit:** Find active changes that touch the same intent IDs or
    normative terms without a recorded acceptance order.
 7. **Freshness audit:** Find `Conformant` targets whose intent revision,
-   implementation revision, dependencies, or checked conditions have changed.
+   implementation revision, participant revisions, profiles, supporting
+   artifacts, dependencies, or checked conditions have changed.
 
 An observed behavior gap does not automatically become intent. Product
 authority chooses whether to capture, change, leave open, or remove it.
@@ -938,8 +1096,9 @@ regeneration.
 
 A project with existing code SHOULD adopt OpenIntent incrementally:
 
-1. Add `AGENTS.md`, an intent index, a product file, an authority registry, and
-   at least one implementation target.
+1. Add `AGENTS.md`, a root intent index, one product file and product index, an
+   authority registry, and at least one implementation target. A multi-product
+   repository also registers each product intent root and dependency.
 2. List product areas that accepted intent does not yet cover.
 3. Study one bounded area in `discovery/`.
 4. Label each source-backed claim `OBSERVED`, `INTENDED`, `UNKNOWN`, or
@@ -987,15 +1146,23 @@ one checkpoint when their revisions or conformance results differ.
 Projects SHOULD report the OpenIntent version they follow in `intent/index.md`.
 They MUST NOT claim conformance without naming a version.
 
+A composition target conforms only when current evidence covers the composition
+itself at the named participant revisions and applicable profiles. Conformant
+components do not make a composition conformant, and a conformant composition
+does not grant its components a broader conformance claim.
+
 ## 16. Tool and vendor independence
 
 OpenIntent requires no executable tool and defines no machine-readable schema.
 Predictable headings, Markdown tables, IDs, and links allow future tools to help
 without owning the method.
 
-A future tool MAY validate structure, assemble context, follow links, or compare
-evidence. A conforming project MUST remain understandable and operable when that
-tool is absent.
+A future tool MAY validate structure, assemble context, follow links, compare
+evidence, or render supporting artifacts. A conforming project MUST remain
+understandable and operable when that tool is absent. A project MAY use a
+specialized editor for an artifact, but the accepted branch MUST contain a
+reviewable representation that does not require that editor or its hosted
+service.
 
 No normative rule may require or prefer one coding agent, model vendor, IDE,
 programming language, framework, storage system, or hosted service. A conforming

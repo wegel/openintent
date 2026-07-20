@@ -44,15 +44,25 @@ IDs. The intent index reports the whole target scope. Maintainers copy a
 `Conformant` result to the index only when current evidence covers every accepted
 rule that the index applies to that target.
 
+A component target and a supported composition use different rows. The
+composition row names the exact component and external-system revisions. A
+passing component result never advances the composition checkpoint by itself.
+
 ## 1. Route a small context set
 
-Read the nearest `AGENTS.md`, then use `intent/index.md` to choose affected
-capabilities. Follow only the glossary, qualities, decisions, and adjacent
-capabilities linked from those rows.
+Read the nearest `AGENTS.md`, then use the root index to choose the owning
+product and its product index. Follow only the affected capability topic,
+glossary, qualities, operating profiles, normative supporting artifacts,
+decisions, and adjacent capabilities linked from those rows.
 
 Check active changes for the same intent IDs and normative terms. When work
 overlaps, link the changes and record which proposed revision must be accepted
 first.
+
+For a cross-product change, identify one coordinator, every affected product
+index, and the product that owns each shared contract. Consumers link to the
+owner's intent IDs rather than copying the rule. Add the change route to the
+root index and every affected product index.
 
 Read relevant intent before searching code when practical. This order helps a
 participant distinguish the product contract from one implementation’s
@@ -79,8 +89,10 @@ Set:
 - Change state: `Active`
 - Intent checkpoint: `Draft`
 
-Add one implementation-target row for each affected target. Set each checkpoint
-to `Not started`, `Exploring`, `Unknown`, or another honest value.
+Add one implementation-target row for each affected component or composition.
+Set each checkpoint to `Not started`, `Exploring`, `Unknown`, or another honest
+value. A composition row lists every participant whose revision can change the
+result.
 
 Keep questions explicit. A question that can change visible behavior,
 permissions, money, safety, compatibility, or acceptance results blocks product
@@ -88,10 +100,14 @@ acceptance for the affected work.
 
 ## 3. Draft the clearest current intent
 
-Authors should edit `intent/product.md`, capabilities, qualities, glossary
-entries, and durable decisions before implementation when practical. This work
-gives implementers a product boundary and gives reviewers concrete choices to
-challenge.
+Authors should edit the owning product file, capabilities, qualities, profiles,
+normative supporting-artifact records, glossary entries, and durable decisions
+before implementation when practical. This work gives implementers a product
+boundary and gives reviewers concrete choices to challenge.
+
+When one capability grows beyond a useful context packet, its author creates a
+capability directory and groups requirements with their scenarios, failure
+behavior, and acceptance methods by behavior topic. File moves keep stable IDs.
 
 Authors edit canonical intent and the change record on the same working branch
 when practical. They do not paste a second copy of each requirement into
@@ -131,6 +147,10 @@ Scope: CAP-PICKUP.retry-unknown-result,
 The change sets its intent checkpoint to `Accepted` only when product authority
 accepted every material choice in that proposed revision. It uses `Partially
 accepted` when the approval covers only a named subset.
+
+A cross-product change records a separate approval for every affected authority
+scope. One approval cannot accept another product's IDs, profiles, or normative
+supporting artifacts.
 
 A team may begin technical exploration before this checkpoint. The branch must
 label the product intent as draft, and reviewers cannot call the exploratory
@@ -178,12 +198,14 @@ when product authority accepts more than one actor-visible result.
 
 ## 7. Build the evidence record
 
-Create one evidence record for each target that reaches `Evidence ready`. Name
-all three:
+Create one evidence record for each target that reaches `Evidence ready`. Name:
 
 - the implementation target;
-- the accepted intent revision; and
-- the exact implementation revision.
+- whether it is a component or composition;
+- the accepted intent revision;
+- the exact implementation revision;
+- each applicable operating profile and its accepted revision; and
+- every composition participant revision when the target is a composition.
 
 List every affected invariant, requirement, normative scenario, and strong
 default. Link each item to a concrete result and record `PASS`, `FAIL`, `NOT
@@ -198,6 +220,11 @@ Run checks in an environment that matches the claim. A unit test cannot prove a
 percentile under production traffic. A simulated controller cannot prove
 unknown firmware behavior.
 
+When a rule governs a visual, audio, protocol, schema, fixture, diagram, or
+other supporting artifact, name its reference ID and compare only the governed
+properties under the declared conditions. Record actual platform,
+accessibility, localization, viewport, protocol, or other permitted variation.
+
 ## 8. Review conformance
 
 The conformance reviewer reads:
@@ -206,14 +233,17 @@ The conformance reviewer reads:
 2. the change record;
 3. the evidence table and linked results;
 4. relevant implementation and tests;
-5. the named implementation target and revision; and
-6. the technical plan last.
+5. the named implementation target and revision;
+6. applicable profile and supporting-artifact revisions;
+7. composition participant revisions when relevant; and
+8. the technical plan last.
 
 The reviewer checks every applicable invariant, requirement, and normative
 scenario. The reviewer checks the recorded reason and consequences for every
 `SHOULD` or `SHOULD NOT` departure.
 
-Before choosing a conclusion, the reviewer checks whether intent, implementation,
+Before choosing a conclusion, the reviewer checks whether intent,
+implementation, composition participants, profiles, supporting artifacts,
 dependencies, conditions, or contradictory observations made prior evidence
 stale. When no applicable rule failed, a stale or missing applicable result
 forces `Not determined`.

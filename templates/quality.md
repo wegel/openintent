@@ -7,6 +7,8 @@
 | Product authority scope | `<registry scope>` |
 | Accepted change | `<change ID or pending>` |
 | Applies to | `<capability IDs>` |
+| Operating profiles | `<PROF IDs or none>` |
+| Read with | `<glossary, normative references, decisions, or none>` |
 | Last reviewed | `<YYYY-MM-DD>` |
 
 ## Product reason
@@ -21,6 +23,7 @@
 environments, and other terms needed to reproduce the result. -->
 
 - `<Measurement term>` means `<precise rule>`.
+- `<PROF-NAME>` fixes `<reused workload, platform, topology, or failure conditions>`; this quality file still owns the required threshold.
 
 ## Requirements
 

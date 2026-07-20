@@ -13,10 +13,14 @@ or business owners.
 - Review material product edits that implementers find while building or testing.
 - Accept assumptions only when the product can tolerate their failure.
 - Confirm compatibility, migration, rollout, and recovery effects.
+- Confirm whether repeated conditions belong in an operating profile and
+  whether exact supporting-artifact content belongs at the product boundary.
+- Accept only the product's owned side of a cross-product contract; require the
+  other product's authority to accept its own IDs.
 - Act only within a scope recorded in the product-authority registry or a linked
   delegation.
-- Name the exact intent IDs, proposed intent revision, and authority scope
-  accepted.
+- Name the exact intent, profile, and reference IDs, proposed intent revision,
+  and authority scope accepted.
 - Accept a coherent subset when unresolved rules can remain draft without
   making the accepted subset misleading. Record the other rules as not
   accepted.

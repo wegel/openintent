@@ -8,7 +8,8 @@ OpenIntent repository.
 | Implementation target | `IMPL-PICKUP-SERVICE` |
 | Intent revision | `intent-example-17` |
 | Build | `example-build-17` |
-| Harness | Parcel harness 2.3, regional audit simulator 1.8 |
+| Harness | Parcel harness 2.3, regional audit simulator 1.8 implementing contract revision 1 |
+| Operating profile | `PROF-PEAK-SITE` at `intent-example-17` |
 | Started | 2026-07-11T09:00:00Z |
 | Regions | A and B, two sites each |
 | Requirement tags | `PROD-PARCEL-PICKUP.secret-boundary`, `PROD-PARCEL-PICKUP.actor-scope`, `PROD-PARCEL-PICKUP.audit-read-only`, `CAP-PICKUP.unavailable-token-disclosure.expired-and-unknown`, `CAP-PICKUP.restrict-operator-recovery.out-of-scope-operator`, `CAP-PICKUP.audit-pickup-actions.recovery`, `QLT-AUDIT.required-event-content`, `QLT-AUDIT.required-event-content.recipient-claim`, `QLT-AUDIT.event-availability.peak-site`, `QLT-AUDIT.regional-retention.regional-boundary` |
@@ -55,7 +56,11 @@ ID. Token-bearer events held no person ID.
 ## Peak-site profile
 
 The harness accepted 500 state-changing pickup actions per second for 900
-seconds, for 450,000 actions.
+seconds, for 450,000 actions. It used two service processes with four workers
+each, controller contract revision 7, and the available regional audit
+interface. A pre-run search succeeded, the audit backlog counter read zero, and
+no assignment supplied more than 5 percent of actions. The run had no deviation
+from `PROF-PEAK-SITE`.
 
 | Measure | Required | Observed |
 | --- | --- | --- |

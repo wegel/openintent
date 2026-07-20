@@ -6,10 +6,10 @@ Act as the implementer for `<change ID>` and implementation target
 ## Read
 
 1. `<nearest AGENTS.md>`
-2. `<intent index>`
+2. `<root index and affected product index>`
 3. `<change record>`, its current intent checkpoint, the named target row, and
    overlapping active changes
-4. `<affected capability, quality, glossary, and decision paths>`
+4. `<affected capability topics, quality, profile, reference, glossary, and decision paths>`
 5. `<technical project guidance>`
 6. relevant implementation files found through repository search
 
@@ -37,27 +37,30 @@ it.
 
 1. Confirm the target boundary and immutable starting revision. Do not infer
    another target's state from this work.
-2. Map each affected ID and normative scenario to implementation work and a
+2. Identify whether the target is a component or composition. For a
+   composition, freeze every participant revision and relevant configuration.
+3. Map each affected ID and normative scenario to implementation work and a
    focused check.
-3. Choose internal mechanics that meet accepted behavior and project technical
+4. Choose internal mechanics that meet accepted behavior and project technical
    rules.
-4. Protect every invariant during migration and partial rollout.
-5. Add or revise checks for success, rejection, failure, recovery, repeat, race,
+5. Protect every invariant during migration and partial rollout.
+6. Add or revise checks for success, rejection, failure, recovery, repeat, race,
    and quality boundaries that apply.
-6. Tag each check with the most specific applicable scenario ID, or otherwise
+7. Tag each check with the most specific applicable scenario ID, or otherwise
    with the requirement or invariant ID.
-7. Run focused checks after each coherent step and project-wide checks before
+8. Run focused checks after each coherent step and project-wide checks before
    handoff.
-8. Record exact commands, results, environment, target, and evidence links.
-9. If intent is missing, wrong, conflicting, or materially ambiguous, pause only
+9. Record exact commands, results, profiles and deviations, supporting
+   references, participant revisions, environment, target, and evidence links.
+10. If intent is missing, wrong, conflicting, or materially ambiguous, pause only
    dependent work, edit the proposed intent or add a concrete question, set the
    intent checkpoint to `Review required`, and ask product authority.
-10. Continue independent work and use tests or prototypes to clarify open
+11. Continue independent work and use tests or prototypes to clarify open
    choices.
-11. Record product discoveries separately from technical choices.
-12. If the target revision or accepted intent revision changes, mark evidence
-    that no longer applies and set this target's checkpoint to `Unknown` until
-    current evidence supports another value.
+12. Record product discoveries separately from technical choices.
+13. If the target, participant, profile, supporting-artifact, or accepted intent
+    revision changes, mark evidence that no longer applies and set this target's
+    checkpoint to `Unknown` until current evidence supports another value.
 
 ## Return
 

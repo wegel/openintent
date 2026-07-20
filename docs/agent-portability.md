@@ -49,11 +49,11 @@ paste them into an agent or use them as review checklists.
 For a behavior change, an agent reads:
 
 1. the nearest `AGENTS.md`;
-2. `intent/index.md`;
+2. the root index and affected product index;
 3. `changes/<change-id>/change.md`;
 4. overlapping active changes named by the index;
-5. affected capability and quality files;
-6. linked glossary and decision sections;
+5. affected capability topics and quality files;
+6. linked profile, normative reference, glossary, and decision sections;
 7. the named implementation target;
 8. the role card for its current responsibility; and
 9. relevant implementation files found by repository search.
@@ -105,6 +105,7 @@ Before a handoff, the agent records:
 
 - current change state and intent checkpoint;
 - each affected implementation target, revision, and checkpoint;
+- each composition participant revision and applicable profile;
 - affected and completed IDs;
 - open questions and owners;
 - technical choices already made;

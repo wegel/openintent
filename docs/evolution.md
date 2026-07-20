@@ -60,6 +60,7 @@ current version when they do not change a conformance result.
 Field use may justify tools that:
 
 - find duplicate IDs and broken links;
+- check product ownership and cross-product contract routes;
 - find permission or transition summaries without governing IDs;
 - find overlapping active changes without an acceptance order;
 - build a context packet from the intent index;
@@ -67,8 +68,10 @@ Field use may justify tools that:
 - check that evidence covers affected rules;
 - compare an accepted requirement with recent test results;
 - render state transitions and trace maps;
-- help reviewers find stale conformance evidence; or
-- keep implementation targets and their evidence scopes distinct.
+- help reviewers find stale conformance evidence;
+- keep component and composition targets and their evidence scopes distinct;
+- compare governed properties in normative supporting artifacts; or
+- compare evidence conditions with named operating profiles.
 
 Such a tool should read the same Markdown that people review. It should report
 findings, not silently repair or reinterpret product intent.

@@ -10,8 +10,9 @@ OpenIntent repository.
 | Build | `example-build-17` |
 | Harness | Parcel harness 2.3 |
 | Controller | Simulator 3.2, contract revision 7 |
+| Normative supporting artifact | `REF-CONTROLLER-OPEN-V7` at `intent-example-17` |
 | Started | 2026-07-10T15:18:44Z |
-| Requirement tags | `CAP-PICKUP.unknown-result-blocks-claim`, `CAP-PICKUP.one-request-id`, `CAP-PICKUP.start-open-request.claim-to-first-attempt`, `CAP-PICKUP.retry-unknown-result.lost-success`, `CAP-PICKUP.exhaustion-requires-recovery.controller-unreachable`, `CAP-PICKUP.apply-definite-open-result.executed-and-not-executed`, `CAP-PICKUP.reconcile-unknown-result`, `CAP-PICKUP.reconcile-unknown-result.late-success`, `CAP-PICKUP.reconcile-unknown-result.safe-release` |
+| Requirement tags | `PROD-PARCEL-PICKUP.secret-boundary`, `CAP-PICKUP.unknown-result-blocks-claim`, `CAP-PICKUP.one-request-id`, `CAP-PICKUP.start-open-request.claim-to-first-attempt`, `CAP-PICKUP.retry-unknown-result.lost-success`, `CAP-PICKUP.exhaustion-requires-recovery.controller-unreachable`, `CAP-PICKUP.apply-definite-open-result.executed-and-not-executed`, `CAP-PICKUP.reconcile-unknown-result`, `CAP-PICKUP.reconcile-unknown-result.late-success`, `CAP-PICKUP.reconcile-unknown-result.safe-release` |
 
 ## Cases
 
@@ -65,9 +66,26 @@ Across 1,000 timed logical requests:
 - request ID mismatches: 0; and
 - attempts sent after a definite result: 0.
 
+## Revision 7 request-body comparison
+
+The harness parsed every first attempt and retry, then compared each body with
+`intent/references/controller-open-v7.json` under the rules in
+`REF-CONTROLLER-OPEN-V7`.
+
+| Measure | Expected | Observed |
+| --- | --- | --- |
+| Top-level fields per body | Exactly `type`, `request_id`, `site_id`, `compartment_id` | Match in 2,500 of 2,500 transmissions |
+| `type` value | `open_compartment` | Match in 2,500 of 2,500 transmissions |
+| Identifier meaning | Logical request, assigned site, assigned compartment | Match in 2,500 of 2,500 transmissions |
+| Token, recipient, or parcel fields or fixture values | 0 | 0 |
+
+The comparison ignored JSON field order and whitespace, which the reference
+record marks as illustrative.
+
 ## Result
 
-PASS for `CAP-PICKUP.unknown-result-blocks-claim`,
+PASS for `PROD-PARCEL-PICKUP.secret-boundary`,
+`CAP-PICKUP.unknown-result-blocks-claim`,
 `CAP-PICKUP.one-request-id`, `CAP-PICKUP.start-open-request`,
 `CAP-PICKUP.retry-unknown-result`,
 `CAP-PICKUP.exhaustion-requires-recovery`,

@@ -9,7 +9,7 @@ you find a product gap while implementing or testing.
 ## Inputs
 
 - `AGENTS.md`, the active change, and the named implementation target;
-- affected intent and linked context;
+- affected intent, profiles, normative supporting artifacts, and linked context;
 - accepted product decisions;
 - technical project guidance; and
 - existing implementation evidence.
@@ -18,6 +18,8 @@ you find a product gap while implementing or testing.
 
 - Map each affected intent ID and normative scenario to work and checks for the
   named target.
+- Identify whether the target is a component or composition. Freeze each
+  composition participant revision and relevant configuration.
 - Check active changes that overlap the same intent IDs or target. Record their
   order or ask the responsible people to resolve the conflict.
 - Choose internal architecture within accepted product freedom.
@@ -27,11 +29,14 @@ you find a product gap while implementing or testing.
 - Preserve every affected and risk-adjacent invariant.
 - Test negative, failure, recovery, repeated, and concurrent behavior where
   relevant.
+- Reproduce applicable operating profiles, record deviations, and compare only
+  the governed properties of each normative supporting artifact.
 - Record technical choices that a future implementer needs.
 - Update only the named target's checkpoint. Keep other targets separate.
-- When the target or accepted intent revision changes, mark evidence that no
-  longer applies and return the target checkpoint to `Unknown` until current
-  evidence supports another value.
+- When the target, participant, accepted intent, profile, or normative
+  supporting-artifact revision changes, mark evidence that no longer applies
+  and return the target checkpoint to `Unknown` until current evidence supports
+  another value.
 - Keep the plan and evidence current enough for another participant to continue.
 
 ## Pause condition

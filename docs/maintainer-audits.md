@@ -59,6 +59,10 @@ change or publish OpenIntent while a required audit says `FAIL`.
    checkpoint, or evidence.
 5. Change one behavior-relevant revision in the review thought experiment and
    confirm that the rules return stale evidence to `Unknown`.
+6. Select a composition target, change one participant revision, and confirm
+   that component evidence cannot keep the composition conformant.
+7. Change an applicable profile or normative supporting artifact and confirm
+   that dependent evidence becomes stale.
 
 ## 4. Templates, prompts, and roles
 
@@ -72,6 +76,14 @@ change or publish OpenIntent while a required audit says `FAIL`.
    allows.
 5. Confirm that optional files are clearly optional and the minimum file set
    remains usable without them.
+6. Build one single-product index and one multi-product root index from the
+   templates. Confirm that shared contracts have one owner and every consumer
+   can route to it.
+7. Build one modular capability from its index and topic templates. Confirm
+   that each behavior topic keeps its requirements, scenarios, and acceptance
+   methods together.
+8. Fill one operating profile and normative supporting-artifact record. Confirm
+   that the profile creates no duty and the reference hides no semantic rule.
 
 ## 5. Parcel example
 
@@ -90,6 +102,17 @@ executable thought experiment:
    revised intent, named approval, implementation work, and evidence.
 6. Check failure, permission, concurrency, time, recovery, secret, audit, and
    stale-evidence cases.
+7. Route the Courier Console product from the repository index and follow its
+   consumed pickup contract to the Parcel Pickup Coordinator's owning IDs.
+8. Follow `PROF-PEAK-SITE` from the audit rule into evidence and confirm that
+   the profile defines conditions rather than a threshold or passing result.
+9. Follow `REF-CONTROLLER-OPEN-V7` from its governing pickup requirement to its
+   checked-in fixture and evidence scope.
+10. Follow the draft `REF-COURIER-STOP-CARD` from its governing requirements to
+    the SVG and confirm that text keeps semantic and accessibility duties while
+    the visual carries only its declared relationships.
+11. Confirm that the pickup-site composition remains `Unknown` and cannot
+    borrow the pickup-service component's `Conformant` result.
 
 ## 6. Links and IDs
 

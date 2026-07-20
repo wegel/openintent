@@ -3,6 +3,7 @@
 | Field | Value |
 | --- | --- |
 | Product | `<name>` |
+| Repository index | `<intent/index.md or this file>` |
 | OpenIntent version | `0.1` |
 | Accepted branch | `<branch>` |
 | Contract state | Draft |
@@ -28,6 +29,15 @@ it for the exact scope.
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | `PROD-<NAME>` | `<product title>` | Draft | `intent/product.md` | `<registry scope>` | `IMPL-<NAME>` | `<glossary or none>` | `<product-wide search terms>` |
 
+## Product dependencies and shared contracts
+
+<!-- Delete when the product owns no shared contract and consumes none. The
+repository index identifies one owner for every cross-product contract. -->
+
+| Direction | Other product | Contract | Owning intent IDs | Failure or compatibility consequence |
+| --- | --- | --- | --- | --- |
+| Owns or consumes | `PROD-<NAME>` | `<boundary>` | `<intent IDs>` | `<observable consequence>` |
+
 ## Glossaries
 
 <!-- Delete this section until the product needs a shared or product-wide
@@ -51,6 +61,24 @@ glossary. Capability-local terms may stay in their capability. -->
 | --- | --- | --- | --- | --- | --- | --- |
 | `QLT-<NAME>` | `<measured quality>` | Draft | `intent/qualities/QLT-<NAME>.md` | `<registry scope>` | `IMPL-<NAME>` | `<capability IDs>` |
 
+## Operating profiles
+
+<!-- Profiles define reusable supported conditions, not product duties. Delete
+until two or more rules or evidence runs need the same conditions. -->
+
+| ID | Title | Intent state | Path | Authority scope | Implementation targets | Used by |
+| --- | --- | --- | --- | --- | --- | --- |
+| `PROF-<NAME>` | `<workload, platform, device, topology, or failure conditions>` | Draft | `intent/profiles/PROF-<NAME>.md` | `<registry scope>` | `IMPL-<NAME>` | `<intent IDs>` |
+
+## Normative supporting artifacts
+
+<!-- Delete until exact visual, audible, protocol, schema, fixture, diagram, or
+other artifact content forms part of the product boundary. -->
+
+| ID | Title | Intent state | Record | Source or rendering | Authority scope | Governing intent IDs |
+| --- | --- | --- | --- | --- | --- | --- |
+| `REF-<NAME>` | `<artifact role>` | Draft | `intent/references/REF-<NAME>.md` | `<checked-in path>` | `<registry scope>` | `<intent IDs>` |
+
 ## Durable product decisions
 
 <!-- Decision records explain rules but do not create them. Delete this section
@@ -62,9 +90,9 @@ until a durable decision exists. -->
 
 ## Implementation targets
 
-| ID | Name and scope | Owner | Current implementation revision | Accepted intent revision | Checkpoint | Latest evidence | Detailed record |
-| --- | --- | --- | --- | --- | --- | --- | --- |
-| `IMPL-<NAME>` | `<service, application, device, or release line>` | `<person or team>` | `<immutable revision or not started>` | `<accepted Git commit or pending>` | Not started | `<evidence link or none yet>` | `<path or none>` |
+| ID | Kind and scope | Owner | Current implementation revision | Accepted intent revision | Checkpoint | Components, participants, or dependencies | Latest evidence | Detailed record |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| `IMPL-<NAME>` | `<component or composition>: <service, app, device, release line, or supported assembly>` | `<person or team>` | `<immutable revision or not started>` | `<accepted Git commit or pending>` | Not started | `<target IDs, external systems, or none>` | `<evidence link or none yet>` | `<path or none>` |
 
 Never combine targets whose revisions or conformance results differ.
 Use `Conformant` here only when current evidence covers every accepted rule that
@@ -102,6 +130,8 @@ An empty table means no known gaps, not proof that none exist. -->
 - Invariant or requirement: `CAP-<NAME>.<semantic-slug>`
 - Scenario: `CAP-<NAME>.<parent-slug>.<scenario-slug>`
 - Quality requirement: `QLT-<NAME>.<semantic-slug>`
+- Operating profile: `PROF-<NAME>`
+- Normative supporting artifact: `REF-<NAME>`
 - Decision: `DEC-<four digits>`
 - Change: `CHG-<YYYYMMDD>-<NAME>`
 - Implementation target: `IMPL-<NAME>`

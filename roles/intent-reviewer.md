@@ -17,6 +17,15 @@ behave differently at a meaningful boundary.
 - Seek missing actors, states, denied paths, races, retries, late results, and
   recovery behavior.
 - Challenge vague quality and security claims.
+- Check that each shared contract has one owning product and linked consumers.
+- Check that operating profiles define reproducible conditions without hiding
+  duties or results.
+- Check that normative supporting artifacts declare governed properties,
+  allowed variation, and a checked-in reviewable form without hiding semantic
+  behavior.
+- Check that each governing requirement keeps semantic and accessibility duties
+  in text and explains why exact artifact properties form part of the boundary.
+- Check that modular capability routes group files by behavior topic.
 - Apply the replaceability test to technical details.
 - Check that assumptions do not hide product duties.
 - Check that every material edit names a registered product-authority scope.
@@ -27,6 +36,8 @@ behave differently at a meaningful boundary.
   internal mechanics or hiding a question.
 - Check overlapping active changes and require an order, rebase point, or named
   person who will resolve the conflict.
+- Require one coordinator and separate authority approvals for a cross-product
+  change, and require a route from the root and every affected product index.
 - Give each finding an intent ID, evidence, consequence, and required action.
 - State which counterexamples were checked even when none produces a finding.
 

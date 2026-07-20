@@ -1,15 +1,15 @@
-# Parcel Pickup Coordinator agent guide
+# Parcel locker repository agent guide
 
 This file is the canonical entry point for this example.
 
 ## Authority
 
 - Accepted branch: `main`
-- Accepted product intent: `intent/`
-- Intent index: `intent/index.md`
+- Repository index: `intent/index.md`
+- Parcel Pickup Coordinator intent: `intent/`
+- Courier Console draft intent: `products/courier-console/intent/`
 - Product authority registry: `intent/index.md#product-authority-registry`
-- Implementation targets: `IMPL-PICKUP-SERVICE` and
-  `IMPL-PICKUP-SERVICE-LEGACY`
+- Implementation targets: see each product index
 
 Accepted intent on `main` outranks the fictional implementation evidence,
 tests, discovery notes, and old changes. Report a conflict or missing rule rather
@@ -18,9 +18,11 @@ than guessing.
 ## Read order
 
 1. Read `intent/index.md`.
-2. Read the named change record.
-3. Read only affected capabilities and linked qualities, terms, and decisions.
-4. Select one implementation target and read only its fictional implementation
+2. Read each affected product index and its authority registry.
+3. Read the named change record.
+4. Read only affected capabilities and linked qualities, profiles, supporting
+   artifacts, terms, and decisions.
+5. Select one implementation target and read only its fictional implementation
    material named by the change or index.
 
 ## Work rules
@@ -34,8 +36,12 @@ than guessing.
 - Keep databases, queues, modules, and tasks in the change plan.
 - Pause only work that would encode an unresolved product choice.
 - Preserve intent IDs and record evidence by ID.
+- Keep shared rules under one owning product. A consuming product links to those
+  IDs and does not copy them.
 - Keep each target's checkpoint and evidence separate. Never use evidence from
   one target as proof for another.
+- Keep component and composition evidence separate. A simulator-backed service
+  result cannot prove that an assembled physical site conforms.
 - When a target or accepted intent revision changes, treat old evidence as stale
   and return that target to `Unknown` until current evidence supports a new
   checkpoint.

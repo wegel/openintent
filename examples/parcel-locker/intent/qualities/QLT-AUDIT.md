@@ -7,7 +7,7 @@
 | Product authority scope | Pickup data security and audit |
 | Accepted change | `CHG-20260701-CONTROLLER-UNCERTAINTY` |
 | Applies to | `CAP-PICKUP` |
-| Last reviewed | 2026-07-19 |
+| Last reviewed | 2026-07-20 |
 
 ## Product reason
 
@@ -20,8 +20,8 @@ without receiving the bearer secret that authorizes another pickup attempt.
   state transition, or operator reconciliation request.
 - **Available to audit search** means an authorized auditor can retrieve the
   event by assignment ID and event time through the regional audit interface.
-- **Peak-site profile** means 500 state-changing pickup actions per second for 15
-  minutes, with no more than 5 percent of actions from one assignment.
+- **Peak-site profile** means the accepted conditions in
+  [`PROF-PEAK-SITE`](../profiles/PROF-PEAK-SITE.md).
 - Latency starts when the product accepts the state-changing action and ends
   when audit search can return its event.
 
@@ -96,5 +96,5 @@ This scenario is normative.
 | Intent ID | Environment and workload | Evidence needed | Review cadence |
 | --- | --- | --- | --- |
 | `QLT-AUDIT.required-event-content`, `QLT-AUDIT.required-event-content.recipient-claim` | Each event type and operator path | Schema and payload inspection plus one-to-one state-action coverage | Every event-shape change |
-| `QLT-AUDIT.event-availability`, `QLT-AUDIT.event-availability.peak-site` | Peak-site profile for 15 minutes | Timed report with raw counts, percentile method, slowest event, and missing-event count | Before a throughput increase or audit-path change |
+| `QLT-AUDIT.event-availability`, `QLT-AUDIT.event-availability.peak-site` | `PROF-PEAK-SITE` | Timed report with actual profile conditions, deviations, raw counts, percentile method, slowest event, and missing-event count | Before a throughput increase, audit-path change, or profile edit |
 | `QLT-AUDIT.regional-retention`, `QLT-AUDIT.regional-retention.regional-boundary` | Two-region authorization fixture and aged events | Positive and negative query tests at 179 and 181 days | Every permission or retention change |

@@ -6,6 +6,8 @@
 | Change state | Active |
 | Intent checkpoint | Draft |
 | Author | `<person or agent>` |
+| Affected products | `<PROD IDs>` |
+| Cross-product coordinator | `<person or not applicable>` |
 | Product authority scopes | `<registry scopes>` |
 | Created | `<YYYY-MM-DD>` |
 | Target release | `<release, date, or none>` |
@@ -34,8 +36,9 @@ invariant>` remains true.
 An implementer or reviewer should read:
 
 - `intent/index.md`
+- `<repository index and each affected product index>`
 - `<affected capability>`
-- `<linked glossary, quality, decision, or adjacent capability>`
+- `<linked glossary, quality, profile, reference, decision, or adjacent capability>`
 - `<overlapping active changes or none>`
 
 ## Intent edits
@@ -45,7 +48,7 @@ canonical files on the same working branch when practical. Summarize; do not
 copy full normative text. List a scenario when its conditions or results change
 independently of its parent. -->
 
-| Kind | Intent IDs | Canonical file | Summary |
+| Kind | Intent, profile, or reference IDs | Canonical file or artifact record | Summary |
 | --- | --- | --- | --- |
 | Add | `<new IDs>` | `<path>` | `<new product duty>` |
 | Change | `<existing IDs>` | `<path>` | `<same continuing duty with changed wording, conditions, or bound>` |
@@ -60,9 +63,9 @@ results. A checkpoint here covers the affected and preserved IDs in this
 change; it does not by itself claim that the target meets every accepted rule in
 the intent index. -->
 
-| Target ID | Owner | Checkpoint | Implementation revision | Current deployed behavior | Latest evidence |
-| --- | --- | --- | --- | --- | --- |
-| `IMPL-<NAME>` | `<person or team>` | Not started | `<revision or not started>` | `<same as intent, concrete difference, or not deployed>` | `<path, link, or none yet>` |
+| Target ID | Kind | Owner | Checkpoint | Implementation revision | Components or participants | Current deployed behavior | Latest evidence |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| `IMPL-<NAME>` | `<component or composition>` | `<person or team>` | Not started | `<revision or not started>` | `<target and external-system revisions, or none>` | `<same as intent, concrete difference, or not deployed>` | `<path, link, or none yet>` |
 
 ## Compatibility and migration
 
@@ -97,6 +100,9 @@ Partially accepted when product authority accepted only the recorded subset. -->
 | --- | --- | --- | --- | --- | --- |
 | Intent review | `<commit>` | `<IDs>` | `<named person>` | `<YYYY-MM-DD>` | `<accepted, rejected, or changes requested>` |
 | Evidence review | `IMPL-<NAME>` at `<revision>` | `<IDs>` | `<named reviewer>` | `<YYYY-MM-DD>` | `<Conforms, Does not conform, or Not determined>` |
+
+For a cross-product change, keep a separate intent-review row for each product
+authority scope. One product's approval does not accept another product's IDs.
 
 ## Completion rule
 

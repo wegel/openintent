@@ -177,15 +177,19 @@ roles. OpenIntent 0.1 changes that draft in these ways.
 | Suggested item | OpenIntent choice | Reason |
 | --- | --- | --- |
 | Product | Keep | Gives all capabilities one purpose, boundary, actor set, and global invariant list |
+| Repository and product indices | Keep routing separate from behavior | Lets a multi-product repository name one owner per contract and load one product's context at a time |
 | Glossary | Use when terms are shared or ambiguous; split by domain when large | Stops agents from assigning different meanings without forcing an empty file |
-| Capabilities | Keep as the primary behavior unit | Gives agents a coherent, bounded context packet |
+| Capabilities | Keep as the primary behavior unit; split large ones by behavior topic | Gives agents a coherent, bounded context packet without separating requirements from their scenarios and evidence methods |
 | Quality requirements | Keep separately when cross-cutting | Prevents repeated or vague quality claims |
+| Operating profiles | Keep reusable supported conditions separate from duties | Lets several rules and evidence records name the same workload, platform, topology, or failure condition without copying it |
+| Normative supporting artifacts | Keep exact governed content with a Markdown scope record | Lets visual, audio, protocol, schema, fixture, or diagram detail use its clearest medium without hiding semantic rules |
 | Decisions | Keep as explanatory records | Preserves reasons without creating a second contract |
 | Scenarios | Nest under requirements | Keeps behavior and its boundary examples together |
 | Examples | Keep inside relevant artifacts and mark non-normative | Prevents a separate example catalog from becoming hidden authority |
 | Changes | Keep one stable folder per coherent change | Connects purpose, Git diff, plan, and evidence |
 | Questions | Keep in the active change or discovery record | Avoids a global backlog that every agent must load |
 | Evidence | Keep per implementation target and revision within a change | Prevents several builds or release lines from sharing one conformance claim |
+| Component and composition targets | Register separately | Prevents a component check from claiming that an assembled system works |
 
 ### Capability sections
 

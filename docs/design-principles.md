@@ -71,6 +71,13 @@ OpenIntent templates name review facets but do not require empty sections. A
 reviewer asks about every relevant facet and records only the answers that
 constrain the product.
 
+When one capability becomes too large, writers split it by behavior topic and
+keep each requirement with its scenarios, failure behavior, and acceptance
+method. When several rules repeat the same supported conditions, writers name
+one operating profile. When exact visual, audible, protocol, or spatial detail
+matters, writers attach a governed artifact in the clearest medium. These
+choices reduce repeated text without creating separate authority systems.
+
 ## 5. Name uncertainty instead of filling it with guesses
 
 OpenIntent separates four cases:
@@ -115,18 +122,20 @@ interchangeable.
 
 ## 7. Load a context packet, not the repository
 
-The root `AGENTS.md` tells an agent where intent lives. `intent/index.md` maps a
-request to a small set of files. Each capability lists the related terms,
-qualities, and durable decisions it needs.
+The root `AGENTS.md` tells an agent where intent lives. The root index maps a
+request to an owning product, and the product index maps it to a small set of
+files. Each capability or behavior topic lists the related terms, qualities,
+profiles, normative references, and durable decisions it needs.
 
 A normal implementation agent should need:
 
 1. the nearest `AGENTS.md`;
-2. the intent index;
+2. the root and affected product indices;
 3. one active change record;
 4. overlapping active changes, when any exist;
-5. affected capability files;
-6. only the linked qualities, terms, and decisions;
+5. affected capability topics;
+6. only the linked qualities, profiles, normative references, terms, and
+   decisions;
 7. the named implementation target; and
 8. the implementation files found during code search.
 
@@ -153,6 +162,11 @@ virtual team for every patch.
 
 Predictable Markdown headings and IDs can support a future linter or context
 builder. No tool should become the only way to understand the contract.
+
+A team may edit a visual, audio, protocol, or diagram source with a specialized
+tool. The accepted branch still carries a reviewable representation and a
+Markdown record that explains its scope. The tool helps people edit; it does
+not own the product contract.
 
 This constraint protects projects from vendor churn and keeps the first version
 honest. If people cannot follow a rule through ordinary files and Git review,

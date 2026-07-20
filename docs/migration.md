@@ -26,14 +26,21 @@ the product owner.
 
 ## 1. Add the routing files
 
-Add a concise root `AGENTS.md`, `intent/index.md`, and `intent/product.md`. The
-index registers product authority and each implementation target. The product
-file may start with only well-supported purpose, actors, boundaries, and global
-invariants. Mark draft text as draft.
+Add a concise root `AGENTS.md` and root `intent/index.md`. For one product, add
+`intent/product.md` and use the root index as its product index. For several
+products, register each product ID, product index, intent root, authority scope,
+dependencies, and implementation targets. The root index names one owner for
+every shared contract. Each product file may start with only well-supported
+purpose, actors, boundaries, and global invariants. Mark draft text as draft.
 
 Map existing technical guidance separately. Coding style, framework choices,
 build commands, and module rules can remain in existing developer documents.
 `AGENTS.md` should link to them but should not put them into product intent.
+
+Register component and composition targets separately. A running deployment
+that assembles several daemons, applications, devices, or external services may
+need its own composition target even when every component comes from the same
+repository revision.
 
 ## 2. Choose a bounded area
 
@@ -64,6 +71,12 @@ A discoverer may inspect:
 For each claim, record the source path or durable link, revision or date,
 environment, and confidence. A newer source is not automatically more
 authoritative. A running system can still be wrong.
+
+Existing screenshots, diagrams, schemas, fixtures, audio, and design files are
+sources during discovery. Product authority decides whether exact content
+should become a normative supporting artifact. Existing benchmark environments
+and device matrices can become operating profiles only after reviewers decide
+that they describe supported conditions rather than one historical run.
 
 ## 4. Build a discovery table
 

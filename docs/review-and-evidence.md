@@ -12,8 +12,11 @@ claim all three.
 
 The reviewer checks that:
 
-- every Draft, Accepted, and Retired artifact appears in `intent/index.md`;
-- the index registers product authority scopes and implementation targets;
+- every Draft, Accepted, and Retired artifact appears in its product index;
+- the root index registers products, owned shared contracts, dependencies, and
+  cross-product changes;
+- each product index registers authority scopes, component and composition
+  targets, operating profiles, and normative supporting artifacts;
 - every normative rule and scenario has a stable, unique ID;
 - every normative permission and transition summary links to governing IDs;
 - every linked file and heading exists;
@@ -23,8 +26,9 @@ The reviewer checks that:
 - every accepted change names an authorized approver, proposed revision, IDs,
   result, and date;
 - overlapping changes name an acceptance order;
-- every evidence record names its target, intent revision, implementation
-  revision, and environment; and
+- every evidence record names its target kind, intent revision, implementation
+  revision, profiles, and environment;
+- every composition record names all participant revisions; and
 - intent state, change state, intent checkpoint, and target checkpoints are
   visible.
 
@@ -44,6 +48,10 @@ replacement implementer.
 - Do non-goals exclude plausible scope that an agent might otherwise add?
 - Does the contract state externally required technology details and delegate
   internal choices?
+- Which product owns each shared contract, and what does each consumer do when
+  that contract changes or fails?
+- Does a large capability route one behavior topic without forcing unrelated
+  context?
 
 ### Behavior questions
 
@@ -73,6 +81,9 @@ replacement implementer.
   `UNSPECIFIED`?
 - Could a different implementation produce valid evidence without copying the
   current architecture?
+- Does each operating profile define only reusable conditions?
+- Does each normative supporting artifact govern exact properties without
+  hiding semantic behavior or requiring a hosted editor?
 
 ## Adversarial review without forced findings
 
@@ -101,6 +112,10 @@ Different claims need different checks.
 | Accessibility | Automated checks plus assistive-technology review where needed | Treating one scanner as complete accessibility proof |
 | Operator workflow | Rehearsal or observed run with an audit record | Reviewing a runbook without trying the steps |
 | External compatibility | Contract tests against supported versions | Testing one current version and claiming all supported versions |
+| Visual or spatial contract | Rendered comparison plus interaction and accessibility checks | Treating one screenshot as proof for every viewport, state, language, or input mode |
+| Audio or temporal contract | Recorded output, timing trace, and human listening where perception matters | Letting clean counters replace an audible or perceptual check |
+| Protocol or schema reference | Fixture replay, negative vectors, and cross-implementation exchange | Proving that one parser accepts its own output and calling that interoperability |
+| Supported composition | End-to-end check with every participant revision recorded | Combining passing component reports without running the assembly |
 
 One item may need several forms of evidence. The evidence record names limits so
 a later reviewer can decide whether risk calls for more.
@@ -115,11 +130,11 @@ maintaining a second trace database.
 Use one row per rule by default. Group IDs only when the same check, conditions,
 result, and limits apply to every ID:
 
-| Intent ID | Check | Environment | Result | Evidence | Limits |
-| --- | --- | --- | --- | --- | --- |
-| `CAP-PICKUP.one-active-claim` | Race two valid claims 1,000 times and inspect winners | Integration build, two workers | PASS | `tests/...`, run 1842 | Did not simulate process loss after claim write |
-| `CAP-PICKUP.retry-unknown-result` | Drop two controller responses and inspect request IDs | Hardware simulator 3.2 | PASS | report link | Simulator does not model controller reboot |
-| `QLT-RECOVERY.outage-result-time` | Five-minute outage at declared traffic | Staging | NOT RUN | issue link | Staging controller unavailable |
+| Intent ID | Reference | Check | Profile and actual environment | Result | Evidence | Limits |
+| --- | --- | --- | --- | --- | --- | --- |
+| `CAP-PICKUP.one-active-claim` | none | Race two valid claims 1,000 times and inspect winners | Integration build, two workers | PASS | `tests/...`, run 1842 | Did not simulate process loss after claim write |
+| `CAP-PICKUP.retry-unknown-result` | `REF-CONTROLLER-OPEN-V7` | Drop two controller responses and inspect request IDs | Controller simulator 3.2 | PASS | report link | Simulator does not model controller reboot |
+| `QLT-RECOVERY.outage-result-time` | none | Five-minute outage at declared traffic | `PROF-PEAK-SITE`; staging | NOT RUN | issue link | Staging controller unavailable |
 
 A missing check remains a visible row. When no applicable rule has failed, that
 gap forces `Not determined`. Release owners may accept operational risk, but
@@ -159,8 +174,10 @@ test that the actor-visible choice cannot escape its stated boundary.
 
 ## Evidence freshness
 
-An evidence record applies to one target, one intent revision, one implementation
-revision, an environment, and a set of conditions. Later intent, code,
+An evidence record applies to one target, one intent revision, one
+implementation revision, named profile revisions, an environment, and a set of
+conditions. A composition record also applies to its exact participant
+revisions. Later intent, code, participant, profile, supporting-artifact,
 dependency, configuration, data shape, or infrastructure changes can make it
 stale.
 
@@ -168,6 +185,8 @@ Projects should rerun evidence when:
 
 - code touches an affected requirement path;
 - a dependency changes behavior at the boundary;
+- a composition participant revision changes;
+- an applicable operating profile or normative supporting artifact changes;
 - operating conditions move outside the measured range;
 - an incident contradicts the prior result; or
 - a reviewer changes the requirement.
@@ -196,6 +215,11 @@ The record states whether it checks one change's rules or every accepted rule
 that applies to the target. A passing change-scoped record does not prove whole-
 target conformance. The intent index may show `Conformant` only when the current
 evidence set covers the whole target scope.
+
+A component and a composition keep separate conclusions. A component result
+does not prove that a supported assembly interoperates. A composition result
+does not prove that one component works in another assembly or outside the
+checked profile.
 
 ## Future formal checks
 

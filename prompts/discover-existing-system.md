@@ -6,7 +6,7 @@ Act as the discoverer for `<bounded product area>` in implementation target
 ## Read
 
 1. `<nearest AGENTS.md>`
-2. `<intent index and any existing intent for the area>`
+2. `<root index, affected product index, and any existing intent for the area>`
 3. `<named code, tests, telemetry, incidents, policies, interviews, tickets, and interface sources>`
 
 ## Goal
@@ -34,6 +34,14 @@ Do not edit accepted intent, implementation, or tests in this task.
 7. Turn unknown and conflicting claims into concrete alternatives with actor
    consequences.
 8. Name the registered product authority that must decide each product question.
+9. Record existing workloads, devices, platforms, topologies, and failure states
+   as observations. Do not make them operating profiles until product authority
+   confirms that they are supported conditions.
+10. Record existing screenshots, designs, audio, schemas, fixtures, and diagrams
+    as sources. Do not make them normative supporting artifacts until a
+    governing requirement and accepted reference record define their scope.
+11. Identify the product that appears to own each shared contract and record a
+    conflict when sources assign ownership differently.
 
 ## Return
 

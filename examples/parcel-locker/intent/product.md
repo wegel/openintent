@@ -6,7 +6,7 @@
 | Status | Accepted |
 | Product authority scope | Parcel pickup behavior; pickup data security and audit |
 | Accepted change | `CHG-20260701-CONTROLLER-UNCERTAINTY` |
-| Last reviewed | 2026-07-19 |
+| Last reviewed | 2026-07-20 |
 
 ## Purpose
 
@@ -92,6 +92,15 @@ controller reconciliation, or change an assignment.
 
 - [`QLT-AUDIT`](qualities/QLT-AUDIT.md) constrains every pickup state change and
   operator recovery action.
+
+## Owned and consumed cross-product contracts
+
+- The Parcel Pickup Coordinator owns the meaning of `Expired` and the secret
+  and actor-scope rules named in the repository index. The draft Courier
+  Console consumes those rules without gaining a new interface or permission.
+- The Parcel Pickup Coordinator consumes the fulfillment system's accepted
+  assignment-registration contract. This repository does not own that outside
+  contract.
 
 ## Assumptions and dependencies
 

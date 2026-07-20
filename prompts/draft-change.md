@@ -5,8 +5,8 @@ Act as the intent author for `<change ID or proposed outcome>`.
 ## Read
 
 1. `<nearest AGENTS.md>`
-2. `<intent index>`
-3. `<affected capability and quality paths>`
+2. `<root index and affected product index>`
+3. `<affected capability topics, quality, profile, and reference paths>`
 4. `<relevant discovery, issue, incident, research, or policy sources>`
 
 Do not read unrelated capabilities or old changes unless an explicit link or a
@@ -20,8 +20,8 @@ Propose the smallest complete product-contract edit that lets `<actor>` achieve
 ## Allowed writes
 
 - `changes/<change-id>/change.md`
-- affected files under `intent/`
-- `intent/index.md` when routing changes
+- affected files under each registered intent root
+- root or product indices when ownership or routing changes
 - a proposed durable product decision when the choice needs one
 
 Do not edit implementation code, tests, or technical architecture in this task.
@@ -34,20 +34,29 @@ Do not edit implementation code, tests, or technical architecture in this task.
 3. Define outcome, boundary, actors, permissions, non-goals, and relevant states.
 4. Name the registered product-authority scope for every material product
    choice.
-5. Write one observable obligation per stable ID where practical. Link every
+5. For shared behavior, name one owning product and link every consumer to the
+   owner's intent IDs. For a cross-product change, name one coordinator and
+   every affected authority scope, then route the change from the root and each
+   affected product index.
+6. Write one observable obligation per stable ID where practical. Link every
    permission, state, transition, or flow summary that carries a product duty to
    its governing IDs.
-6. Cover relevant rejection, failure, recovery, retry, concurrent, late, expiry,
+7. Cover relevant rejection, failure, recovery, retry, concurrent, late, expiry,
    privacy, safety, accessibility, and quality behavior.
-7. Apply the replaceability test to each technical detail.
-8. Mark normative scenarios explicitly. Add every product invariant,
+8. Apply the replaceability test to each technical detail.
+9. Use an operating profile only for reused supported conditions. Use a
+   normative supporting artifact only when exact checked-in content forms part
+   of the boundary; state its governed properties and allowed variation.
+10. Mark normative scenarios explicitly. Add every product invariant,
    requirement, and normative scenario to an acceptance map.
-9. Summarize added, changed, retired, and preserved IDs in the change record.
-10. Find active changes that touch the same IDs. Record an order, rebase point,
+11. Summarize added, changed, retired, and preserved intent, profile, and
+    reference IDs in the change record.
+12. Find active changes that touch the same IDs. Record an order, rebase point,
     or named person who will resolve each overlap.
-11. Name every implementation target in scope and give each target its own
-    checkpoint row. Do not copy one target's state to another.
-12. Keep blocking questions visible with owners. Leave the change state `Active`
+13. Name every component and composition target in scope and give each target
+    its own checkpoint row. List every composition participant revision. Do not
+    copy one target's state to another.
+14. Keep blocking questions visible with owners. Leave the change state `Active`
    and the intent checkpoint `Draft`.
 
 ## Return

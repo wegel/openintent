@@ -66,6 +66,15 @@ The `<concrete product actor>` MUST `<condition that remains true>`.
 - **ASSUMPTION:** `<fact outside product control>`
 - `<External system>` provides `<named dependency>` under `<linked contract>`.
 
+## Owned and consumed cross-product contracts
+
+<!-- Delete when this repository contains one product and no outside product
+contract needs a durable ownership link. Do not copy another product's rules. -->
+
+| Direction | Product | Boundary | Governing intent IDs | Compatibility or failure behavior |
+| --- | --- | --- | --- | --- |
+| Owns or consumes | `PROD-<NAME>` | `<shared protocol, data, user, or operator boundary>` | `<owner's IDs>` | `<what this product promises when the boundary changes or fails>` |
+
 ## Acceptance map
 
 | Intent ID | Evidence needed |

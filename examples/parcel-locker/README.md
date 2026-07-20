@@ -1,7 +1,8 @@
-# Parcel Pickup Coordinator example
+# Parcel locker product repository example
 
-This fictional project shows how an OpenIntent repository can specify parcel
-pickup from a shared locker. The example includes:
+This fictional project shows how one OpenIntent repository can govern a parcel
+pickup product and route a separately owned Courier Console draft. The example
+includes:
 
 - bearer-token permissions without exposing recipient identity;
 - two valid pickup attempts racing for one parcel;
@@ -10,13 +11,21 @@ pickup from a shared locker. The example includes:
 - an implementation discovery that sends intent back through product review;
 - operator recovery with an audit trail;
 - a technical plan that stays outside product intent;
-- a completed fictional evidence record with stated limits; and
-- two implementation targets whose different conformance results remain
-  separate.
+- a completed fictional evidence record with stated limits;
+- two service component targets whose different conformance results remain
+  separate;
+- an independently governed second product with a modular capability;
+- one operating profile that defines reproducible conditions without hiding a
+  performance threshold;
+- one JSON artifact that governs a controller request shape;
+- one draft SVG that governs visual relationships across phone and desktop
+  stop cards; and
+- a pickup-site composition that remains `Unknown` despite conformant service
+  component evidence.
 
-No service implementation ships in this example. The evidence runs and build
-IDs are illustrative records from a fictional harness. They demonstrate the
-shape and honesty expected from evidence; they do not certify code in this
+No app or service implementation ships in this example. The evidence runs and
+build IDs are illustrative records from a fictional harness. They demonstrate
+the shape and honesty expected from evidence; they do not certify code in this
 repository.
 
 ## Read order
@@ -26,8 +35,15 @@ repository.
 3. [intent/product.md](intent/product.md)
 4. [intent/capabilities/CAP-PICKUP.md](intent/capabilities/CAP-PICKUP.md)
 5. [intent/qualities/QLT-AUDIT.md](intent/qualities/QLT-AUDIT.md)
-6. [changes/CHG-20260701-CONTROLLER-UNCERTAINTY/change.md](changes/CHG-20260701-CONTROLLER-UNCERTAINTY/change.md)
-7. The change [plan](changes/CHG-20260701-CONTROLLER-UNCERTAINTY/plan.md) and
+6. [PROF-PEAK-SITE](intent/profiles/PROF-PEAK-SITE.md) and
+   [REF-CONTROLLER-OPEN-V7](intent/references/REF-CONTROLLER-OPEN-V7.md)
+7. [the Courier Console product index](products/courier-console/intent/index.md)
+   and its modular
+   [capability index](products/courier-console/intent/capabilities/CAP-COURIER-EXCEPTIONS/index.md),
+   then its draft
+   [visual reference](products/courier-console/intent/references/REF-COURIER-STOP-CARD.md)
+8. [changes/CHG-20260701-CONTROLLER-UNCERTAINTY/change.md](changes/CHG-20260701-CONTROLLER-UNCERTAINTY/change.md)
+9. The change [plan](changes/CHG-20260701-CONTROLLER-UNCERTAINTY/plan.md) and
    [evidence](changes/CHG-20260701-CONTROLLER-UNCERTAINTY/evidence.md)
 
 Read [discovery/controller-timeouts.md](discovery/controller-timeouts.md) to see
@@ -53,6 +69,28 @@ different implementation targets. Evidence supports conformance only for the
 5.x target. The [legacy evidence](changes/CHG-20260701-CONTROLLER-UNCERTAINTY/evidence-legacy.md)
 keeps the 4.8 target's failed and untested rules visible instead of borrowing
 the 5.x result.
+
+The index also registers `IMPL-PICKUP-SITE-R7` as a composition of the service,
+a physical controller, and the regional audit interface. Its checkpoint stays
+`Unknown` because the fictional evidence checks a service component against
+simulators, not the assembled site.
+
+The draft Courier Console owns its product choices and consumes only the pickup
+rules named by the Parcel Pickup Coordinator. The example leaves its missing
+interface and platform choices open instead of turning guesses into accepted
+intent. Its capability uses an index and behavior-topic file so one product can
+grow without forcing every reader to load every rule.
+
+The Courier Console also carries `REF-COURIER-STOP-CARD` and its SVG source as a
+Draft proposal. Text defines fields, permissions, states, and accessibility
+meaning. The drawing defines only the proposed visual grouping and reading
+order, with explicit phone, desktop, localization, and large-text variation.
+
+`PROF-PEAK-SITE` gives reviewers the exact load and topology to reproduce.
+`QLT-AUDIT.event-availability` still owns the passing threshold.
+`REF-CONTROLLER-OPEN-V7` and its JSON source govern a request shape that prose
+alone would make harder to compare. The parent pickup rules still own timing,
+identity, and secret handling.
 
 The change record summarizes a policy edit but does not copy its normative text.
 In a real Git repository, the branch diff would show the exact edit to

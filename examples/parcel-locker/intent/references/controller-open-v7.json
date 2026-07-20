@@ -1,0 +1,6 @@
+{
+  "type": "open_compartment",
+  "request_id": "request-example",
+  "site_id": "site-example",
+  "compartment_id": "compartment-example"
+}

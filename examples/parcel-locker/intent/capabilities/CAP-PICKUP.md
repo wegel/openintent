@@ -6,8 +6,8 @@
 | Status | Accepted |
 | Product authority scope | Parcel pickup behavior; locker custody safety; pickup data security and audit |
 | Accepted change | `CHG-20260701-CONTROLLER-UNCERTAINTY` |
-| Last reviewed | 2026-07-19 |
-| Read with | `intent/glossary.md`, `intent/qualities/QLT-AUDIT.md`, `intent/decisions/DEC-0001.md` |
+| Last reviewed | 2026-07-20 |
+| Read with | `intent/glossary.md`, `intent/qualities/QLT-AUDIT.md`, `intent/profiles/PROF-PEAK-SITE.md`, `intent/references/REF-CONTROLLER-OPEN-V7.md`, `intent/decisions/DEC-0001.md` |
 
 ## Outcome and boundary
 
@@ -169,7 +169,12 @@ This scenario is normative.
 
 After granting a claim, the Parcel Pickup Coordinator MUST create one logical
 open request for the assigned site and compartment, then send its first
-controller attempt within two seconds.
+controller attempt within two seconds. Under controller contract revision 7,
+the request body MUST match
+[`REF-CONTROLLER-OPEN-V7`](../references/REF-CONTROLLER-OPEN-V7.md). It MUST NOT
+carry a pickup token, recipient data, or parcel data. The revision 7 controller
+uses these exact field names and meanings, so they form an external
+compatibility boundary.
 
 #### CAP-PICKUP.start-open-request.claim-to-first-attempt Claim to first attempt
 
@@ -179,6 +184,8 @@ This scenario is normative.
 - WHEN the controller connection is available
 - THEN the first attempt carries the assigned site and compartment and one new
   open request ID
+- AND its request body has the revision 7 fields and meanings in
+  `REF-CONTROLLER-OPEN-V7`
 - AND the product sends the attempt no later than `T + 2 seconds`
 
 ### CAP-PICKUP.apply-definite-open-result Apply a definite open result
@@ -389,7 +396,7 @@ new logical open request automatically.
 | `CAP-PICKUP.one-request-id`, `CAP-PICKUP.retry-unknown-result`, `CAP-PICKUP.retry-unknown-result.lost-success` | A controller trace that compares request IDs across timeouts and a lost-success response |
 | `CAP-PICKUP.unavailable-token-disclosure`, `CAP-PICKUP.unavailable-token-disclosure.expired-and-unknown` | Paired black-box responses for each unavailable token class and a disclosure review |
 | `CAP-PICKUP.repeat-token-status`, `CAP-PICKUP.repeat-token-status.lost-claim-response` | A lost-response test that repeats the valid token and counts claims and open requests |
-| `CAP-PICKUP.start-open-request`, `CAP-PICKUP.start-open-request.claim-to-first-attempt` | A timed claim-to-controller trace at the two-second boundary |
+| `CAP-PICKUP.start-open-request`, `CAP-PICKUP.start-open-request.claim-to-first-attempt` | A timed claim-to-controller trace at the two-second boundary plus comparison with `REF-CONTROLLER-OPEN-V7` |
 | `CAP-PICKUP.apply-definite-open-result`, `CAP-PICKUP.apply-definite-open-result.executed-and-not-executed` | Matching executed and non-executed result checks inside and after the pickup window |
 | `CAP-PICKUP.reject-unmatched-controller-result`, `CAP-PICKUP.reject-unmatched-controller-result.wrong-request` | Results with a wrong site, compartment, and request ID while state and claim are inspected |
 | `CAP-PICKUP.reconcile-unknown-result`, `CAP-PICKUP.reconcile-unknown-result.late-success`, `CAP-PICKUP.reconcile-unknown-result.safe-release` | Reconciliation tests for executed, not executed, unknown, and late results |

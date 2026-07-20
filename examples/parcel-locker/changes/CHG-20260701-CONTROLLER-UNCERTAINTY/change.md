@@ -6,6 +6,8 @@
 | Change state | Completed |
 | Intent checkpoint | Accepted |
 | Author | Priya Chen |
+| Affected products | `PROD-PARCEL-PICKUP` |
+| Cross-product coordinator | Not applicable |
 | Product authority scopes | Parcel pickup behavior; locker custody safety; pickup data security and audit |
 | Created | 2026-07-01 |
 | Target release | Pickup service 5.0 |
@@ -46,6 +48,8 @@ An implementer or reviewer should read:
 - `intent/glossary.md`
 - `intent/capabilities/CAP-PICKUP.md`
 - `intent/qualities/QLT-AUDIT.md`
+- `intent/profiles/PROF-PEAK-SITE.md`
+- `intent/references/REF-CONTROLLER-OPEN-V7.md`
 - `intent/decisions/DEC-0001.md`
 - `discovery/controller-timeouts.md`
 
@@ -57,17 +61,23 @@ An implementer or reviewer should read:
 | Add | `CAP-PICKUP.retry-unknown-result`, `CAP-PICKUP.exhaustion-requires-recovery`, `CAP-PICKUP.reconcile-unknown-result`, `CAP-PICKUP.restrict-operator-recovery` | `intent/capabilities/CAP-PICKUP.md` | Bound retries, enter recovery, reconcile definite results, and scope operators |
 | Add | `CAP-PICKUP.expire-unclaimed-assignment`, `CAP-PICKUP.apply-definite-open-result`, `CAP-PICKUP.reject-unmatched-controller-result` | `intent/capabilities/CAP-PICKUP.md` | Make expiry and matching controller-result transitions explicit normative duties |
 | Add | `QLT-AUDIT.required-event-content`, `QLT-AUDIT.event-availability`, `QLT-AUDIT.regional-retention` | `intent/qualities/QLT-AUDIT.md` | Make recovery actions timely, scoped, retained, and free of bearer secrets |
+| Add | `PROF-PEAK-SITE` | `intent/profiles/PROF-PEAK-SITE.md` | Define the conditions for the accepted peak-site audit check without copying its thresholds |
+| Add | `REF-CONTROLLER-OPEN-V7` | `intent/references/REF-CONTROLLER-OPEN-V7.md`, `intent/references/controller-open-v7.json` | Fix the controller revision 7 request fields and meanings in one reviewable fixture |
 | Add | `PROD-PARCEL-PICKUP.audit-read-only` | `intent/product.md` | Make an auditor's read-only product boundary explicit |
-| Change | `CAP-PICKUP.start-open-request` | `intent/capabilities/CAP-PICKUP.md` | Define one logical open request and a two-second first-attempt bound |
+| Change | `CAP-PICKUP.start-open-request` | `intent/capabilities/CAP-PICKUP.md` | Define one logical open request, its revision 7 body, and a two-second first-attempt bound |
 | Change | `CAP-PICKUP.audit-pickup-actions` | `intent/capabilities/CAP-PICKUP.md` | Cover controller and operator recovery events in audit |
 | Preserve | `PROD-PARCEL-PICKUP.secret-boundary`, `PROD-PARCEL-PICKUP.actor-scope`, `CAP-PICKUP.one-active-claim`, `CAP-PICKUP.collected-after-open-close`, `CAP-PICKUP.first-valid-claim-wins`, `CAP-PICKUP.unavailable-token-disclosure`, `CAP-PICKUP.repeat-token-status`, `CAP-PICKUP.close-completes-pickup`, `CAP-PICKUP.claim-expiry-race` | Product and pickup intent | Preserve secret, scope, single-claim, winner, completion, disclosure, repeat, close, and expiry rules |
 
 ## Implementation targets
 
-| Target ID | Owner | Checkpoint | Implementation revision | Current deployed behavior | Latest evidence |
-| --- | --- | --- | --- | --- | --- |
-| `IMPL-PICKUP-SERVICE` | Priya Chen, Pickup Service | Conformant | `example-build-17` | Fictional controller-revision-7 sites run `example-build-17`; older-controller sites fall outside this target | `evidence.md` |
-| `IMPL-PICKUP-SERVICE-LEGACY` | Legacy Pickup Service team | Nonconformant | `build-4.8` | Older-controller sites retain build 4.8 and its two known gaps until they can join the 5.x target | `evidence-legacy.md` |
+| Target ID | Kind | Owner | Checkpoint | Implementation revision | Components or participants | Current deployed behavior | Latest evidence |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| `IMPL-PICKUP-SERVICE` | Component | Priya Chen, Pickup Service | Conformant | `example-build-17` | None; evidence uses named simulators | Fictional component build checked with a controller revision 7 simulator; this target does not include a physical site | `evidence.md` |
+| `IMPL-PICKUP-SERVICE-LEGACY` | Component | Legacy Pickup Service team | Nonconformant | `build-4.8` | None; evidence uses the legacy site simulator | Older-controller sites retain build 4.8 and its two known gaps until they can join the 5.x target | `evidence-legacy.md` |
+
+`IMPL-PICKUP-SITE-R7` was registered after this completed change. It is not an
+affected target of this historical record. The current intent index tracks its
+separate `Unknown` checkpoint and missing composition evidence.
 
 ## Compatibility and migration
 
@@ -110,7 +120,8 @@ change conformance.
 | Review | Proposed revision or target | Intent IDs | Named approver or reviewer | Date | Result and notes |
 | --- | --- | --- | --- | --- | --- |
 | Intent review | `intent-example-17` | All Add and Change rows except security-specific rules | Jordan Ellis and Sam Okafor | 2026-07-03 | Accepted; Sam accepted the claim-retention safety choice |
-| Security and audit review | `intent-example-17` | `PROD-PARCEL-PICKUP.secret-boundary`, `PROD-PARCEL-PICKUP.audit-read-only`, `CAP-PICKUP.restrict-operator-recovery`, `QLT-AUDIT` and descendants | Elena Ruiz | 2026-07-05 | Accepted |
+| Security and audit review | `intent-example-17` | `PROD-PARCEL-PICKUP.secret-boundary`, `PROD-PARCEL-PICKUP.audit-read-only`, `CAP-PICKUP.restrict-operator-recovery`, `QLT-AUDIT` and descendants, `PROF-PEAK-SITE` | Elena Ruiz | 2026-07-05 | Accepted |
+| Locker contract review | `intent-example-17` | `CAP-PICKUP.start-open-request`, `CAP-PICKUP.one-request-id`, `REF-CONTROLLER-OPEN-V7` | Sam Okafor | 2026-07-05 | Accepted the revision 7 body and its allowed variations |
 | Intent re-review | `intent-example-17` | `CAP-PICKUP.apply-definite-open-result`, `CAP-PICKUP.reject-unmatched-controller-result`, `CAP-PICKUP.reconcile-unknown-result` and its scenarios | Jordan Ellis and Sam Okafor | 2026-07-08 | Accepted after implementation probes exposed late and mismatched controller results |
 | Evidence review | `IMPL-PICKUP-SERVICE` at `example-build-17` | All affected and preserved IDs | Marcus Bell | 2026-07-12 | Conforms against `intent-example-17` with the limits in `evidence.md` |
 

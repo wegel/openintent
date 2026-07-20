@@ -15,14 +15,25 @@ templates/change.md       -> changes/CHG-<DATE>-<NAME>/change.md
 
 Use the other templates when the product needs them:
 
+- [repository-index.md](repository-index.md) when one repository contains
+  several products; if the root index also serves one product, append that
+  product's authority, artifact, target, change, and gap sections from
+  [intent-index.md](intent-index.md);
+- [capability-index.md](capability-index.md) and
+  [capability-topic.md](capability-topic.md) when one capability needs a routed
+  directory instead of one file;
 - [quality.md](quality.md) for a measurable rule that spans capabilities;
+- [profile.md](profile.md) for reusable workload, device, platform, topology,
+  or failure conditions;
+- [reference.md](reference.md) when exact checked-in visual, audible, protocol,
+  schema, fixture, diagram, or other content forms part of the contract;
 - [glossary.md](glossary.md) when several artifacts share an ambiguous product
   term;
 - [decision.md](decision.md) for a durable product choice and its reason;
 - [plan.md](plan.md) for broad, risky, or multi-session technical work;
 - [discovery.md](discovery.md) when studying an existing implementation;
-- [evidence.md](evidence.md), copied once per target and revision, before a
-  reviewer calls that target conformant; and
+- [evidence.md](evidence.md), copied once per component or composition target
+  and revision, before a reviewer calls that target conformant; and
 - [review-checklist.md](review-checklist.md) during intent and conformance review.
 
 Do not keep a blank template in `intent/` as if it were an accepted artifact.
@@ -39,6 +50,15 @@ Create an artifact when someone can name its real product job.
   intent on the working branch when implementers find a product gap.
 - Track intent and implementation checkpoints separately.
 - Track each implementation target and revision separately.
+- Register each product once and give every shared contract one owning product.
+- Record every composition participant revision. Do not infer composition
+  conformance from component results.
+- Let profiles define reusable conditions, but keep duties and thresholds in
+  product, capability, or quality rules.
+- Give each normative supporting artifact one reference record, governing
+  intent IDs, declared scope, allowed variation, and checked-in reviewable form.
+- Split large capabilities by behavior topic, never by requirements versus
+  scenarios versus evidence method.
 - Keep product authority scopes and conflict resolvers in the intent index.
 - Treat permission and transition tables as summaries that link to normative
   IDs, never as untagged requirements.

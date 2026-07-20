@@ -8,6 +8,10 @@ every observable choice according to their recorded states.
 | --- | --- |
 | Change | `<change ID and link>` |
 | Implementation target | `IMPL-<NAME>` |
+| Target kind | `<component or composition>` |
+| Composition participants | `<exact target and external-system revisions, or not applicable>` |
+| Operating profiles | `<PROF IDs and revisions or none>` |
+| Normative supporting artifacts | `<REF IDs and revisions or none>` |
 | Plan owner | `<person or agent>` |
 | Revision | `<date or plan revision>` |
 | Status | Draft |

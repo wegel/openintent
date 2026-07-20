@@ -7,8 +7,16 @@ answer automatically passed.
 ## Intent structure
 
 - [ ] `intent/index.md` lists every affected artifact and context link.
-- [ ] Each product, glossary, capability, quality, and decision file has an ID,
-  visible state, authority scope or decision owners, and linked change.
+- [ ] The root index lists every product, product index, intent root,
+  dependency, and cross-product change.
+- [ ] Every shared contract has one owning product; consumers link instead of
+  copying its rules.
+- [ ] Each product, glossary, capability, quality, profile, reference record, and
+  decision file has an ID, visible state, authority scope or decision owners,
+  and linked change.
+- [ ] Each operating profile and normative supporting-artifact record has an
+  ID, state, authority scope, linked change, and product-index entry.
+- [ ] Each modular capability index lists every normative topic and its context.
 - [ ] The intent index names authority scopes, conflict resolvers, and acceptance
   records.
 - [ ] Each change record has an ID, owner, state, intent checkpoint, and a
@@ -18,8 +26,11 @@ answer automatically passed.
 - [ ] Every scenario names a parent requirement.
 - [ ] Every normative scenario appears in the acceptance map.
 - [ ] Permission, state, flow, and transition summaries link to governing IDs.
-- [ ] The change record names every added, changed, retired, and preserved ID.
+- [ ] The change record names every added, changed, retired, and preserved
+  intent, profile, and reference ID.
 - [ ] Every link resolves to a repository file or durable external source.
+- [ ] Every normative supporting artifact has a checked-in reviewable source or
+  rendering.
 
 ## Product meaning
 
@@ -48,6 +59,10 @@ answer automatically passed.
 - [ ] Cancellation, expiry, and late results have defined behavior where relevant.
 - [ ] Privacy, abuse, accessibility, safety, and audit rules appear where relevant.
 - [ ] Quality rules name conditions, scope, threshold, units, and measurement.
+- [ ] Operating profiles contain reproducible conditions and no hidden duty or
+  passing result.
+- [ ] Supporting-artifact records distinguish governed properties,
+  illustrative details, and allowed variation.
 
 ## Intent acceptance
 
@@ -79,7 +94,12 @@ answer automatically passed.
 
 - [ ] The evidence record names an immutable implementation revision.
 - [ ] The evidence record names one implementation target.
+- [ ] The evidence record identifies the target as a component or composition.
+- [ ] A composition record names every participant revision, configuration, and
+  role and does not borrow a component's conclusion.
 - [ ] The evidence record names the accepted intent revision.
+- [ ] The evidence record names every applicable profile and records actual
+  conditions and deviations.
 - [ ] The evidence record says whether it covers one change or the whole target
   intent scope.
 - [ ] Automated evidence includes the requirement ID in the test name or an
@@ -93,9 +113,13 @@ answer automatically passed.
 - [ ] Negative, permission, failure, recovery, repeat, and race paths were tested
   where relevant.
 - [ ] Each result links to a concrete artifact and states its limits.
+- [ ] Evidence for a governed supporting artifact names its REF ID, comparison
+  conditions, governed properties, and allowed variation.
 - [ ] Failed, missing, and inconclusive checks remain visible.
 - [ ] The reviewer checked whether intent, code, dependencies, conditions, or
   contradictory observations made the evidence stale.
+- [ ] The reviewer checked whether participant, profile, or supporting-artifact
+  revisions made composition or artifact evidence stale.
 - [ ] The conclusion does not claim more than the evidence shows.
 - [ ] An intent-index `Conformant` checkpoint has current evidence for every
   accepted rule that applies to that target, not merely one change's rules.

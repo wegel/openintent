@@ -4,12 +4,22 @@
 | --- | --- |
 | Change | `<change ID and link>` |
 | Implementation target | `IMPL-<NAME>` |
+| Target kind | `<component or composition>` |
 | Intent revision | `<immutable accepted-branch commit>` |
-| Implementation revision | `<immutable commit, build ID, or digest>` |
+| Implementation revision | `<immutable commit, build ID, digest, or composition manifest>` |
+| Operating profiles | `<PROF IDs and accepted revisions, or none>` |
 | Reviewer | `<person or agent>` |
 | Review date | `<YYYY-MM-DD>` |
 | Environment | `<versions, configuration, hardware, data, and relevant services>` |
 | Conclusion | Not determined |
+
+## Composition participants
+
+<!-- Required for a composition target. Delete for a component target. -->
+
+| Target or external system | Exact revision | Configuration or role | Evidence boundary |
+| --- | --- | --- | --- |
+| `<participant>` | `<immutable revision>` | `<relevant configuration>` | `<what this participant supplies>` |
 
 ## Scope
 
@@ -26,9 +36,9 @@ includes its most specific intent ID in the test name or an adjacent comment.
 Group IDs only when the same check, conditions, result, and limits apply to each
 one. -->
 
-| Intent ID | Check | Conditions | Result | Evidence link | Limits |
-| --- | --- | --- | --- | --- | --- |
-| `<ID>` | `<test, inspection, analysis, exercise, or observation>` | `<environment and input>` | `<result>` | `<path, report, run, screenshot, or durable URL>` | `<what this does not prove>` |
+| Intent ID | Supporting reference | Check | Conditions and profile deviations | Result | Evidence link | Limits |
+| --- | --- | --- | --- | --- | --- | --- |
+| `<ID>` | `<REF ID or none>` | `<test, inspection, analysis, exercise, or observation>` | `<environment, input, profile, and deviations>` | `<result>` | `<path, report, run, screenshot, or durable URL>` | `<what this does not prove>` |
 
 ## Commands and results
 
@@ -65,6 +75,8 @@ forces Does not conform even when other rows remain unknown. -->
 
 - Applicable intent or normative terms changed: `<no, or IDs>`
 - Implementation moved from the named revision: `<no, or revision>`
+- Composition participant revisions changed: `<not applicable, no, or details>`
+- Operating profiles or normative supporting artifacts changed: `<no, or IDs>`
 - Dependencies, configuration, data, or conditions changed: `<no, or details>`
 - Incidents or observations contradict this result: `<no, or links>`
 

@@ -7,7 +7,7 @@
 | Product authority scope | `<registry scope>` |
 | Accepted change | `<change ID or pending>` |
 | Last reviewed | `<YYYY-MM-DD>` |
-| Read with | `<linked glossary sections, qualities, decisions, or adjacent capabilities>` |
+| Read with | `<linked glossary sections, qualities, profiles, references, decisions, or adjacent capabilities>` |
 
 ## Outcome and boundary
 
@@ -102,6 +102,17 @@ behavior. Organize around rules instead of keeping empty concern headings. -->
 
 <!-- If this capability must detect or compensate when an assumption fails, add
 a normative requirement above. -->
+
+## Operating profiles and normative supporting artifacts
+
+<!-- Delete until this capability uses one. A profile defines conditions. A
+reference record defines the scope of exact checked-in artifact content. The
+governing requirements above still define product duties and state why each
+exact governed property forms part of the product boundary. -->
+
+| ID | Role in this capability | Governing intent IDs | Path |
+| --- | --- | --- | --- |
+| `PROF-<NAME>` or `REF-<NAME>` | `<conditions or governed artifact properties>` | `<requirement IDs>` | `<profile or reference record>` |
 
 ## Unspecified observable behavior
 

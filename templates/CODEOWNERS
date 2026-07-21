@@ -1,0 +1,4 @@
+# Replace the owner and add every path that OPENINTENT.md treats as human-owned intent.
+/OPENINTENT.md @intent-owner
+# /specs/ @intent-owner
+# /media/design/ @intent-owner

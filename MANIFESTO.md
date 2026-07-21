@@ -151,6 +151,10 @@ preserve the temporary bug or local patch. “The top-right icons stay put when
 you switch tabs” belongs in intent. “Remote currently puts them elsewhere”
 belongs with the observed result and implementation work.
 
+An intent revision should make sense to someone who never saw the design
+conversation. It presents the product its authors now want. Earlier alternatives
+belong only when their consequences still constrain future work.
+
 Every compile should name the exact intent revision it realizes. The same LLM
 may edit intent and implementation, but it should keep the two steps visible and
 separate. When implementation reveals a missing choice, it should propose a new

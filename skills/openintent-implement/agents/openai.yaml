@@ -1,0 +1,4 @@
+interface:
+  display_name: "OpenIntent Implement"
+  short_description: "Implement software from human-owned intent"
+  default_prompt: "Use $openintent-implement to make this change from the repository intent."

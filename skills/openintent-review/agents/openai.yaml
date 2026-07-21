@@ -1,0 +1,4 @@
+interface:
+  display_name: "OpenIntent Review"
+  short_description: "Review code against repository intent"
+  default_prompt: "Use $openintent-review to review this change against the repository intent."

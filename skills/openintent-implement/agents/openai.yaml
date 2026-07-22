@@ -1,4 +1,4 @@
 interface:
   display_name: "OpenIntent Implement"
-  short_description: "Implement software from human-owned intent"
-  default_prompt: "Use $openintent-implement to make this change from the repository intent."
+  short_description: "Shape human intent and compile it into software"
+  default_prompt: "Use $openintent-implement to shape this repository's intent, then compile it when I ask."

@@ -1,7 +1,7 @@
 # The OpenIntent Manifesto
 
 Status: Pre-publication foundation for OpenIntent 0.1  
-Last updated: 2026-07-20
+Last updated: 2026-07-22
 
 ## Premise
 
@@ -225,6 +225,14 @@ reasons. It should not duplicate every visual, temporal, spatial, audible, or
 formal detail in prose. OpenIntent should not require every rich source to be
 translated into text.
 
+When a product choice can be stated formally, a model or theorem may carry
+human-owned intent while an LLM writes the proof and the software that realizes
+it. OpenIntent should help people see what the formal claim means, what it
+assumes, and which parts of the product it leaves unchecked. A machine checker
+can establish that exact claim. It cannot establish that the claim captures
+what people wanted, or that code and interfaces it did not examine behave
+correctly.
+
 When the compiler interprets or summarizes a source, it should link each
 important claim to an exact paragraph, image region, design element, video
 interval, diagram node, model state, or other addressable part. It should expose
@@ -290,8 +298,8 @@ should ask:
    taste?
 7. Can a person who is new to the product use it to predict the important
    effects of a bounded change and challenge the compiler's result?
-8. Can a human see what a generated view omitted or inferred and reach the
-   source behind every important claim?
+8. Can a human see what a generated view or check omitted, inferred, assumed,
+   or left unexamined and reach the source behind every important claim?
 9. Does the LLM carry the implementation and bookkeeping work that does not
    need human attention?
 10. Can a project invent a form that we did not anticipate?

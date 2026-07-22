@@ -9,11 +9,26 @@ Version 0.1 uses repository files, ordinary Git branches, two LLM skills, normal
 1. Keep intent beside the code in the same repository. Intent may live in prose, images, recordings, prototypes, formal models, measurements, examples, or any other useful medium.
 2. Add an `OPENINTENT.md` map. The map tells humans and LLMs which sources control each product choice and which evidence can test it.
 3. Wire the workflow into `AGENTS.md` or the repository's equivalent instructions.
-4. Let an implementation LLM work on a normal branch. It reads intent first, keeps the active plan and progress in the chat, revises intent when the work uncovers missing choices, and implements the current intent.
-5. Let a separate LLM review the finished branch against the finished intent.
-6. Let normal CI check deterministic facts and let a human approve the branch upstream.
+4. Let the human and an LLM shape intent for as many rounds as useful. The LLM may inspect code and evidence, but it does not change the implementation until the human asks it to compile the current intent or to build a specific experiment.
+5. Let an implementation LLM compile the current intent on a normal branch. It keeps the active plan and progress in the chat, revises intent when the work uncovers missing choices, and implements the revised intent.
+6. Let a separate LLM review the finished branch against the finished intent.
+7. Let normal CI run the project's deterministic checks, including any mapped model or proof checker, and let a human approve the branch upstream.
 
 Git keeps drafts, branches, commits, rebases, squashes, temporary handoffs, and failed experiments. Each project decides what deserves a lasting place.
+
+Shaping intent includes refactoring its sources. A human and LLM may split a giant specification, gather scattered choices, improve the path through several media, or rename concepts without changing what the product should do. This work matters even when the current code already violates a clearly written rule. OpenIntent does not require one source per request or one permanent record per discarded draft.
+
+Problems found while compiling stay in the same loop. The LLM compares the desired result with the mapped source instead of assuming that every bug needs an intent edit or that no bug does. If the source already says what should happen, the LLM repairs the code and strengthens the evidence. If the source leaves a product choice open, the human and LLM shape that choice before continuing. If using the product changes the human's mind, they revise the intent. Code mechanisms remain in code, tests, and durable engineering notes unless a human needs to control them directly.
+
+Before it edits intent or implementation for each new request or correction, the LLM shows the human how it read the change. A short `My read` block names the applicable classification, the governing source, and what the LLM will edit in the current round. The LLM uses `Implementation defect`, `Missing choice`, `Changed choice`, `Intent refactor`, or `Exploration`, and splits a mixed request when several apply. If later evidence changes that reading, the LLM posts a revised block before continuing. This visible checkpoint lets the human correct a misunderstanding and notice when an LLM has drifted from the OpenIntent workflow.
+
+## Use formal proof where it fits
+
+Some product choices can live in formal definitions, model rules, theorem statements, and explicit assumptions. A project may map those exact declarations as human-owned intent and usually let LLMs write the proof code and the implementation. When one file mixes both roles, `OPENINTENT.md` names the declarations or regions that control human choices.
+
+An LLM may repair an implementation or its proof when a checker fails. It must not quietly weaken a mapped claim, add an assumption or unfinished placeholder, narrow the cases it covers, or break the link between a checked model and the software that claims to realize it. Such a change returns to intent shaping unless the mapped source already delegates that choice.
+
+The project configures CI to run its checker and reject unfinished proofs or assumptions it has not accepted. The implementation and review handoffs name the exact checked claims, their assumptions, the software or protocol tied to them, and anything important the checker did not examine. A human still judges whether the formal claim says the right thing. Projects continue to use tests, benchmarks, devices, and direct human experience for qualities that formal proof does not cover. Formal proof remains optional.
 
 ## Carry active work
 
@@ -22,7 +37,7 @@ The implementation LLM carries the purpose, next steps, progress, discoveries, d
 Before the branch reaches review, the LLM puts each result where future work will naturally find it:
 
 - Lasting product choices go into the mapped intent source.
-- Executable guarantees go into tests, models, benchmarks, or other checks.
+- Executable guarantees go into tests, models, benchmarks, machine-checked proofs, or other checks.
 - Useful implementation or operations knowledge goes into the repository's normal engineering sources.
 - Review evidence goes into the pull request or handoff.
 
